@@ -10,24 +10,31 @@ public class ChessBoard
     /*
     Holds all the squares of the board.
      */
-    private List<List<ChessSquare>> allPieces = new ArrayList<>();
+    private final List<List<ChessSquare>> allPieces = new ArrayList<>();
 
     /**
-     * adds a new square to the board. used when making the board
-     * @param square
+     * Adds a new square to the board. used when making the board
+     * @param square the square you want add
      */
     public void addSquare(ChessSquare square)
     {
+        System.out.println(square.getI()+" : "+square.getJ());
+        if(allPieces.size() <= square.getJ())
+        {
+            List<ChessSquare> temp = new ArrayList<>();
+            allPieces.add(temp);
+        }
         allPieces.get(square.getI()).add(square.getJ(), square);
     }
 
     /**
      * returns any square at the specified coordinates
-     * @param cord
+     * @param cord coordination of the square you seek
      * @return square
      */
     public ChessSquare getSquare(Coordinate cord)
     {
+        System.out.println("get square: "+cord.toString());
         return allPieces.get(cord.i).get(cord.j);
     }
 

@@ -2,7 +2,6 @@ package nilian.Move;
 
 import nilian.Move.PieceMoves.*;
 import nilian.board.ChessSquare;
-import nilian.board.Piece;
 
 import java.util.List;
 

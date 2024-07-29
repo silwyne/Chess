@@ -14,6 +14,6 @@ public class MoveValidation
      */
     public static boolean isThisMoveValid(Coordinate source, Coordinate destination)
     {
-        return false;
+        return true;
     }
 }

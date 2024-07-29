@@ -12,12 +12,14 @@ import nilian.Pieces.PiecesImages;
 public class BoardMaker
 {
 
+    public static GridPane chessboard ;
     public static Color myColor ;
+    public static ChessBoard theBoard = new ChessBoard();
 
     public static GridPane getInitialBoard(Color myColor) throws Exception
     {
         BoardMaker.myColor = myColor ;
-        GridPane chessboard = new GridPane();
+        chessboard = new GridPane();
         chessboard.setGridLinesVisible(true);
         //rows and columns
         for (int i = 0; i < 8; i++) {
@@ -45,9 +47,18 @@ public class BoardMaker
                     //putting it empty while is empty
                     square.setPiece(Piece.EMPTY);
                 }
+
+                //color thing
                 String style = (myColor == Color.WHITE) ^ ((row + col) % 2 == 0) ?
                         BoardStyles.getBlackColor() : BoardStyles.getWhiteColor();
+                Color squareColor = (myColor == Color.WHITE) ^ ((row + col) % 2 == 0) ?
+                        Color.BLACK : Color.WHITE;
+
                 square.setStyle(style);
+                square.setSquareColor(squareColor);
+
+
+                theBoard.addSquare(square);
                 chessboard.add(square, col, row);
             }
         }

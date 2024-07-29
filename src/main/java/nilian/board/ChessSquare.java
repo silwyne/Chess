@@ -10,6 +10,7 @@ public class ChessSquare extends Pane
     private int j ;
     private Piece piece;
     private Color pieceColor;
+    private Color squareColor;
     private boolean isClicked;
 
 
@@ -22,13 +23,20 @@ public class ChessSquare extends Pane
         this.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-                System.out.println("Clicked "+i+" : "+j);
+                System.out.println(pieceColor+" "+piece+" Clicked "+i+" : "+j);
                 MovementHandler.handleClick(ChessSquare.this);
             }
 
         });
     }
 
+    public Color getSquareColor() {
+        return squareColor;
+    }
+
+    public void setSquareColor(Color squareColor) {
+        this.squareColor = squareColor;
+    }
 
     public int getI() {
         return i;
