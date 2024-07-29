@@ -1,6 +1,8 @@
 package nilian.board;
 
+import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
+import nilian.Move.MovementHandler;
 
 public class ChessSquare extends Pane
 {
@@ -8,28 +10,48 @@ public class ChessSquare extends Pane
     private int j ;
     private Piece piece;
     private Color pieceColor;
+    private boolean isClicked;
 
 
     public ChessSquare(int i, int j)
     {
         this.i = i ;
         this.j = j ;
+
+        // Add an onClick event handler
+        this.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+                System.out.println("Clicked "+i+" : "+j);
+                MovementHandler.handleClick(ChessSquare.this);
+            }
+
+        });
     }
 
-    public void setPiece(Piece piece) {
-        this.piece = piece;
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
     }
 
     public int getJ() {
         return j;
     }
 
-    public int getI() {
-        return i;
+    public void setJ(int j) {
+        this.j = j;
     }
 
     public Piece getPiece() {
         return piece;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
     }
 
     public Color getPieceColor() {
@@ -38,5 +60,13 @@ public class ChessSquare extends Pane
 
     public void setPieceColor(Color pieceColor) {
         this.pieceColor = pieceColor;
+    }
+
+    public boolean isClicked() {
+        return isClicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        isClicked = clicked;
     }
 }
