@@ -4,7 +4,7 @@ import nilian.Move.Coordinate;
 
 import java.util.List;
 
-public class Bishop
+public class Pawn
 {
     /**
      *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.

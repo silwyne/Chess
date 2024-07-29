@@ -16,7 +16,7 @@ public class MovementHandler
         if(lastSquareClicked == null)
         {
             lastSquareClicked = square ;
-            MoveShower.showMoves(square);
+            lastSquarePossibleMovements = MoveShower.showMoves(square);
         } else
         {
             //check if the last square can come to the clicked point
