@@ -42,6 +42,8 @@ public class BoardMaker
 
                 } else {
                     square = new ChessSquare(row, col);
+                    //putting it empty while is empty
+                    square.setPiece(Piece.EMPTY);
                 }
                 String style = (myColor == Color.WHITE) ^ ((row + col) % 2 == 0) ?
                         BoardStyles.getBlackColor() : BoardStyles.getWhiteColor();
