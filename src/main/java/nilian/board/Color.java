@@ -1,4 +1,6 @@
 package nilian.board;
 
-public enum Color {
+public enum Color
+{
+    WHITE, BLACK;
 }

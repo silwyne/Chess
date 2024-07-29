@@ -37,3 +37,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Allow resources in the src/main/resources directory
+!src/main/resources/**

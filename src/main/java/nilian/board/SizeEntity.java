@@ -1,4 +1,6 @@
 package nilian.board;
 
-public class SizeEntity {
+public abstract class SizeEntity
+{
+    public static final int squareSize = 80 ;
 }
