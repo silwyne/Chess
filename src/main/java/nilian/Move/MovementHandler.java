@@ -2,36 +2,41 @@ package nilian.Move;
 
 import nilian.board.ChessSquare;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovementHandler
 {
     private static boolean isSomeSquareClicked ;
     private static ChessSquare lastSquareClicked;
-    private static List<Coordinate> lastSquarePossibleMovements ;
+    private static List<Coordinate> possibleMoves ;
 
 
     public static void handleClick(ChessSquare square)
     {
-        if(lastSquareClicked == null)
+        if(lastSquareClicked == null)//first time clicking on anything
         {
             lastSquareClicked = square ;
-            lastSquarePossibleMovements = MoveShower.showMoves(square);
-        } else
+            possibleMoves = MoveShower.showMoves(square);
+        } else //normal days
         {
-            //check if the last square can come to the clicked point
-            checkForMovement(square);
+            possibleMoves = MoveShower.showMoves(square);
         }
+
+        possibleMoves
+                .forEach( e -> System.out.println(e.toString()));
+        possibleMoves.clear();
+        possibleMoves = new ArrayList<>();
     }
 
 
     private static void checkForMovement(ChessSquare destinationSquare)
     {
-        if(lastSquarePossibleMovements != null)
+        if(possibleMoves != null)
         {
             //get the coordinates of destination
             Coordinate theSquareCoordinate = new Coordinate(destinationSquare.getI(), destinationSquare.getJ());
-            if(lastSquarePossibleMovements.contains(theSquareCoordinate))
+            if(possibleMoves.contains(theSquareCoordinate))
             {
                 moveTheLastSquareToDestination();
             }
@@ -40,6 +45,7 @@ public class MovementHandler
 
     private static void moveTheLastSquareToDestination()
     {
+        System.out.println("MOVING");
         //To Do
     }
 

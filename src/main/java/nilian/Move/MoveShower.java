@@ -13,17 +13,17 @@ public class MoveShower
         List<Coordinate> possibleMoves = null ;
         switch (square.getPiece())
         {
-            case BISHOP -> possibleMoves = Bishop.calculatePossibleMoves();
+            case BISHOP -> possibleMoves = Bishop.calculatePossibleMoves(square);
 
-            case ROOK -> possibleMoves = Rook.calculatePossibleMoves();
+            case ROOK -> possibleMoves = Rook.calculatePossibleMoves(square);
 
-            case QUEEN -> possibleMoves = Queen.calculatePossibleMoves();
+            case QUEEN -> possibleMoves = Queen.calculatePossibleMoves(square);
 
-            case KING -> possibleMoves = King.calculatePossibleMoves();
+            case KING -> possibleMoves = King.calculatePossibleMoves(square);
 
-            case HORSE -> possibleMoves = Horse.calculatePossibleMoves();
+            case HORSE -> possibleMoves = Horse.calculatePossibleMoves(square);
 
-            case PAWN -> possibleMoves = Pawn.calculatePossibleMoves();
+            case PAWN -> possibleMoves = Pawn.calculatePossibleMoves(square);
         }
         return possibleMoves ;
     }
