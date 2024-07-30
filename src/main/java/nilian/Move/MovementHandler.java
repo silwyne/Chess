@@ -29,7 +29,10 @@ public class MovementHandler
                 checkForMovement(square);
                 possibleMoves.clear();
                 possibleMoves = new ArrayList<>();
-            } else {
+            } else
+            {
+                isSomeSquareClicked = true ;
+                possibleMoves = MoveShower.showMoves(square);
                 turnLights(true);
             }
         }
@@ -82,9 +85,9 @@ public class MovementHandler
             }
             square.setStyle(style);
             //removing the old one
-            BoardMaker.chessboard.getChildren().remove(lightCord.i, lightCord.j);
+            BoardMaker.chessboard.getChildren().remove(lightCord.i * 8 + lightCord.j);
             //adding a new Pane
-            BoardMaker.chessboard.getChildren().add(square);
+            BoardMaker.chessboard.getChildren().add(lightCord.i * 8 + lightCord.j, square);
         }
     }
 
