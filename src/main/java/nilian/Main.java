@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane chessBoard = BoardMaker.getInitialBoard(Color.WHITE);
-        Scene scene = new Scene(chessBoard, 700, 700);
+        Scene scene = new Scene(chessBoard, 640, 640);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
