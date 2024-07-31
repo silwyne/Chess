@@ -1,5 +1,7 @@
 package nilian.Move;
 
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 import nilian.board.*;
 
 import java.util.ArrayList;
@@ -69,6 +71,8 @@ public class MovementHandler
             lightCord = possibleMove;
             //first form the board
             ChessSquare square = BoardMaker.theBoard.getSquare(lightCord);
+
+            ChessSquare newSquare = square ;
             // special style
             String style;
             if (isLightsOn)
@@ -84,11 +88,18 @@ public class MovementHandler
                 isLightsOn = true;
             }
             square.setStyle(style);
-            //removing the old one
-            BoardMaker.chessboard.getChildren().remove(lightCord.i * 8 + lightCord.j);
-            //adding a new Pane
-            BoardMaker.chessboard.getChildren().add(lightCord.i * 8 + lightCord.j, square);
+
+            //replacing the old one
+            replaceNode(square, newSquare, square.getI(), square.getJ());
+            //setting the new square back to place
+            BoardMaker.theBoard.setSquare(lightCord, newSquare);
         }
+    }
+
+    private static void replaceNode(Node oldNode, Node newNode, int col , int row) {
+        BoardMaker.chessboard.getChildren().remove(oldNode);
+        // Add the new node
+        BoardMaker.chessboard.add(newNode, col, row);
     }
 
 }
