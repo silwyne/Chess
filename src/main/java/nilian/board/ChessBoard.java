@@ -12,6 +12,11 @@ public class ChessBoard
      */
     private final List<List<ChessSquare>> allPieces = new ArrayList<>();
 
+    /*
+    Who is turn is it now ? white or black?
+    Initial value is WHITE at the beginning of the game.
+     */
+    private Color turnColor = Color.WHITE;
     /**
      * Adds a new square to the board. used when making the board
      * @param square the square you want add
@@ -49,5 +54,27 @@ public class ChessBoard
         allPieces.get(cord.i).set(cord.j, null);
         //putting new value
         allPieces.get(cord.i).set(cord.j, square);
+    }
+
+    /**
+     * returns white or black.
+     * @return white if it is white turn to move. and black if it's black turn to move
+     */
+    public Color whoTurnIsIt()
+    {
+        return turnColor;
+    }
+
+    /*
+    Updates the turn after one did his move.
+     */
+    public void nextTurn()
+    {
+        if(turnColor == Color.BLACK)
+        {
+            turnColor = Color.WHITE;
+        } else {
+            turnColor = Color.BLACK;
+        }
     }
 }

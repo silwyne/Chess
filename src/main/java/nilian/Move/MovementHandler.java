@@ -1,10 +1,8 @@
 package nilian.Move;
 
 import javafx.scene.Node;
-import javafx.scene.layout.GridPane;
 import nilian.board.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovementHandler
@@ -12,16 +10,24 @@ public class MovementHandler
     private static boolean isSomeSquareClicked ;
     private static ChessSquare lastSquareClicked;
     private static List<Coordinate> possibleMoves ;
+    private static boolean isLightsOn = false ;
 
 
-    public static void handleClick(ChessSquare square)
+    public static void handleClick(ChessSquare square, ChessBoard board)
     {
         if(lastSquareClicked == null)//first time clicking on anything
         {
-            isSomeSquareClicked = true;
-            lastSquareClicked = square ;
-            possibleMoves = MoveShower.showMoves(square);
-            turnLights(true);
+            /*
+            If the square clicked is empty or turns square piece so let it be clicked.
+             */
+            if(square.getPieceColor() == board.whoTurnIsIt() || square.getPiece() == Piece.EMPTY)
+            {
+                isSomeSquareClicked = true ;
+                lastSquareClicked = square ;
+                possibleMoves = MoveShower.showMoves(square);
+                turnLights(true);
+                isLightsOn = true ;
+            }
         } else //normal days
         {
             if(isSomeSquareClicked)
@@ -38,20 +44,54 @@ public class MovementHandler
                          */
                     } else {
                         /*
-                        He clicked on a f
+                        He clicked on a friend so show this guys possible moves.
                          */
+                        turnLights(false);
+                        possibleMoves.clear();
+                        checkForMovement(square);
+                        turnLights(true);
+                        isLightsOn = true ;
+                    }
+                } else {
+                    /*
+                    he clicked on an empty square.
+                     */
+                    if(lastSquareClicked.getCoordinate().equalsCoordinate(square.getCoordinate()))
+                    {
+                        //on the last empty square he clicked
+                        if(isLightsOn)
+                        {//if the light is on so just turn it off
+                            turnLights(false);
+                            isLightsOn = false;
+                        } else
+                        {//if the light is off so turn it on
+                            turnLights(false);
+                            isLightsOn = true ;
+                        }
                     }
                 }
-//                isSomeSquareClicked = false ;
-//                turnLights(false);
-//                checkForMovement(square);
-//                possibleMoves.clear();
-//                possibleMoves = new ArrayList<>();
-            } else
+            }
+            else
             {
-                isSomeSquareClicked = true ;
-                possibleMoves = MoveShower.showMoves(square);
-                turnLights(true);
+                if(square.getPiece() != Piece.EMPTY)
+                {
+                    /*
+                    He clicked on another piece. lets see if it is enemy or a friend.
+                     */
+                    if(lastSquareClicked.getPieceColor() != square.getPieceColor())
+                    {
+                        /*
+                        They are enemy handle the kill if possible.
+                         */
+                    } else {
+                        /*
+                        He clicked on a friend so show this guys possible moves.
+                         */
+                        turnLights(false);
+                        possibleMoves.clear();
+                        checkForMovement(square);
+                    }
+                }
             }
         }
 
