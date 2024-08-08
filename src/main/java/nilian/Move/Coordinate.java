@@ -16,4 +16,12 @@ public class Coordinate
     {
         return i+" : "+j;
     }
+
+    public boolean equalsCoordinate(Coordinate obj) {
+        return (i == obj.i && j  == obj.j);
+    }
+
+    public boolean equalsCoordinate(int l, int m) {
+        return (i == l && j  == m);
+    }
 }
