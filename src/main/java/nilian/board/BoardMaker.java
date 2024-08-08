@@ -43,7 +43,7 @@ public class BoardMaker
                     square = getSquareWithPiece(row, col);
 
                 } else {
-                    square = new ChessSquare(row, col);
+                    square = new ChessSquare(row, col, theBoard);
                     //putting it empty while is empty
                     square.setPiece(Piece.EMPTY);
                 }
@@ -68,7 +68,7 @@ public class BoardMaker
 
     private static ChessSquare getSquareWithPiece(int row, int col) throws Exception {
 
-        ChessSquare square = new ChessSquare(row, col);
+        ChessSquare square = new ChessSquare(row, col, theBoard);
 
         //get the piece color
         Color pieceColor = getPieceColor(row, myColor);
