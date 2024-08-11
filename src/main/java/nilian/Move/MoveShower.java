@@ -3,6 +3,7 @@ package nilian.Move;
 import nilian.Move.PieceMoves.*;
 import nilian.board.ChessSquare;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoveShower
@@ -23,6 +24,8 @@ public class MoveShower
             case HORSE -> possibleMoves = Horse.calculatePossibleMoves(square);
 
             case PAWN -> possibleMoves = Pawn.calculatePossibleMoves(square);
+
+            case EMPTY -> possibleMoves = new ArrayList<>();
         }
         return possibleMoves ;
     }
