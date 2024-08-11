@@ -26,7 +26,7 @@ public class ChessSquare extends Pane
         this.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-                System.out.println(pieceColor+" "+piece+" Clicked "+i+" : "+j);
+                System.out.println(squareColor+"_square:"+pieceColor+"_"+piece+" Clicked "+i+" : "+j);
                 MovementHandler.handleClick(ChessSquare.this, board);
             }
 
