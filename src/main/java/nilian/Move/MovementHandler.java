@@ -11,6 +11,8 @@ public class MovementHandler
 {
     private static List<Coordinate> possibleMoves = new ArrayList<>();
     private static Set<Coordinate> highlightedSquares = new HashSet<>();
+    private static Coordinate emptyLight ;
+    private static ChessSquare lastSquareClicked;
 
     public static void handleClick(ChessSquare square, ChessBoard board)
     {
@@ -23,12 +25,14 @@ public class MovementHandler
                 moveTheLastSquareToDestination();
                 possibleMoves.clear();
                 turnLights(new HashSet<>(possibleMoves));
+                lastSquareClicked = null ;
             }
             else {
                 System.out.println("###### STATE CLICK :3: extracting possible moves");
                 possibleMoves.clear();
                 possibleMoves = MoveShower.showMoves(square);
                 turnLights(new HashSet<>(possibleMoves));
+                lastSquareClicked = square ;
             }
         } else {
             System.out.println("###### STATE CLICK :4: ");
@@ -65,14 +69,28 @@ public class MovementHandler
 
     private static void moveTheLastSquareToDestination()
     {
-        System.out.println("MOVING");
-        //To Do
+
     }
 
 
-    private static void turnEmpty(Coordinate cor)
-    {
-        System.out.println(cor.toString()+" is empty and on");
+    private static void turnEmpty(Coordinate cor) {
+        // Remove the highlighting from the previous empty square
+        if (emptyLight != null) {
+            ChessSquare previousSquare = BoardMaker.theBoard.getSquare(emptyLight);
+            String style;
+            // Determine the square's color based on its coordinates
+            if ((emptyLight.i + emptyLight.j) % 2 == 0) {
+                style = BoardStyles.getWhiteColor();
+            } else {
+                style = BoardStyles.getBlackColor();
+            }
+            updateSquareStyle(previousSquare, style);
+        }
+
+        // Highlight the new empty square
+        emptyLight = cor;
+        ChessSquare currentSquare = BoardMaker.theBoard.getSquare(cor);
+        updateSquareStyle(currentSquare, BoardStyles.getPossibleStyle());
     }
 
     private static void turnLights(Set<Coordinate> newPossibleMoves) {
@@ -81,13 +99,17 @@ public class MovementHandler
 
         Set<Coordinate> squaresToTurnOff = new HashSet<>(highlightedSquares);
         squaresToTurnOff.removeAll(newPossibleMoves);
+        if(emptyLight != null)
+        {
+            squaresToTurnOff.add(emptyLight);
+        }
 
         // Turn off lights
-        for (Coordinate coord : squaresToTurnOff) {
-            ChessSquare square = BoardMaker.theBoard.getSquare(coord);
+        for (Coordinate cord : squaresToTurnOff) {
+            ChessSquare square = BoardMaker.theBoard.getSquare(cord);
             String style;
             // If the sum of row and column is even, it's a white square, otherwise it's black
-            if ((coord.i + coord.j) % 2 == 0)
+            if ((cord.i + cord.j) % 2 == 0)
             { style = BoardStyles.getWhiteColor();
             } else {style = BoardStyles.getBlackColor();}
             updateSquareStyle(square, style);
@@ -107,11 +129,9 @@ public class MovementHandler
         square.setStyle(style);
         square.applyCss();
         square.requestLayout();
-
         // If needed, uncomment these lines:
         // BoardMaker.chessboard.getChildren().remove(square);
         // BoardMaker.chessboard.add(square, square.getI(), square.getJ());
-
         // Update the model if necessary
         BoardMaker.theBoard.setSquare(new Coordinate(square.getI(), square.getJ()), square);
     }
