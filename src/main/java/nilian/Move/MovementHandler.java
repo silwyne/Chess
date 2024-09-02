@@ -1,5 +1,6 @@
 package nilian.Move;
 
+import javafx.scene.Node;
 import nilian.board.*;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class MovementHandler
             if(checkForMovement(square))
             {
                 System.out.println("###### STATE CLICK :2: Moving last square to clicked square");
-                moveTheLastSquareToDestination();
+                moveTheLastSquareToDestination(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
                 possibleMoves.clear();
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = null ;
@@ -42,11 +43,13 @@ public class MovementHandler
                 possibleMoves.clear();
                 possibleMoves = MoveShower.showMoves(square);
                 turnLights(new HashSet<>(possibleMoves));
+                lastSquareClicked = square;
             } else if(square.getPiece() == Piece.EMPTY)
             {
                 System.out.println("###### STATE CLICK :6");
                 turnEmpty(square.getCoordinate());
                 possibleMoves.clear();
+                lastSquareClicked = null;
             }
         }
         possibleMoves.forEach(e -> System.out.println("Possible move: "+e.toString()));
@@ -55,21 +58,42 @@ public class MovementHandler
 
     private static boolean checkForMovement(ChessSquare destinationSquare)
     {
-        if(possibleMoves != null)
-        {
-            //get the coordinates of destination
-            Coordinate theSquareCoordinate = new Coordinate(destinationSquare.getI(), destinationSquare.getJ());
-            if(possibleMoves.contains(theSquareCoordinate))
-            {
+        System.out.println("CHECKING FOR MOVEMENT");
+        for (Coordinate possibleMove : possibleMoves) {
+            if (possibleMove.equalsCoordinate(destinationSquare.getI(), destinationSquare.getJ())) {
                 return true;
             }
         }
         return false ;
     }
 
-    private static void moveTheLastSquareToDestination()
-    {
 
+    private static void moveTheLastSquareToDestination(ChessSquare square, Coordinate dstCord)
+    {
+        System.out.println("MOVEMENT IS CALLED");
+        ChessSquare emptySquare = new ChessSquare(square.getI(), square.getJ(), square.getBoard());
+        emptySquare.setPiece(Piece.EMPTY);
+        String emptyStyle ;
+        if ((emptySquare.getI() + emptySquare.getJ()) % 2 == 0) {
+            emptyStyle = BoardStyles.getWhiteColor();
+        } else {
+            emptyStyle = BoardStyles.getBlackColor();
+        }
+        updateSquareStyle(emptySquare, emptyStyle);
+
+        //extracting picture
+//        Node piecePicture = square.getChildren().get(0);
+//        ChessSquare newSquare = new ChessSquare(dstCord.i, dstCord.j, square.getBoard());
+//        newSquare.getChildren().add(piecePicture);
+//        newSquare.setPiece(square.getPiece());
+//        newSquare.setPieceColor(square.getPieceColor());
+//        String newStyle ;
+//        if ((newSquare.getI() + newSquare.getJ()) % 2 == 0) {
+//            newStyle = BoardStyles.getWhiteColor();
+//        } else {
+//            newStyle = BoardStyles.getBlackColor();
+//        }
+//        updateSquareStyle(newSquare, newStyle);
     }
 
 
