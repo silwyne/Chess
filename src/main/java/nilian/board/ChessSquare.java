@@ -85,4 +85,6 @@ public class ChessSquare extends Pane
     {
         return new Coordinate(i, j);
     }
+
+    public ChessBoard getBoard() {return this.board;}
 }
