@@ -23,73 +23,81 @@ public class Bishop {
         Coordinate destination;
 
         //right up moves
-
-        for (int ei = 0; ei < 8; ei++) {
-            if (i - ei >= 0 && j + ei < 8)//validation
+        for (int ei = 1; ei < 8; ei++) {
+            if (i - ei >= 0 && j + ei < 8)
             {
                 destination = new Coordinate(i - ei, j + ei);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
                 {
                     if (MoveValidation.isThisMoveValid(source, destination))
                         result.add(destination);
-                }
-                else if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
-                {
-                    if (MoveValidation.isThisMoveValid(source, destination))
-                        result.add(destination);
+                } else {
+                    if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
+                        if (MoveValidation.isThisMoveValid(source, destination))
+                            result.add(destination);
+                    }
+                    break;
                 }
             } else {
                 break;
             }
         }
         //right down moves
-        for (int ei = 0; ei < 8; ei++) {
+        for (int ei = 1; ei < 8; ei++) {
             if (i + ei < 8 && j + ei < 8)//validation
             {
+                System.out.println("ENTER THE BOARD");
                 destination = new Coordinate(i + ei, j + ei);
-                if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
-                {
+                if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
                     if (MoveValidation.isThisMoveValid(source, destination))
                         result.add(destination);
-                } else if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
-                {
-                    if (MoveValidation.isThisMoveValid(source, destination))
-                        result.add(destination);
+                }
+                else {
+                    if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
+                        if (MoveValidation.isThisMoveValid(source, destination))
+                            result.add(destination);
+                    }
+                    break;
                 }
             } else {
                 break;
             }
         }   //left up moves
-        for (int ei = 0; ei < 8; ei++) {
+        for (int ei = 1; ei < 8; ei++) {
             if (i - ei >= 0 && j - ei >= 0)//validation
             {
+                System.out.println("ENTER THE BOARD");
                 destination = new Coordinate(i - ei, j - ei);
-                if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
-                {
+                if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
                     if (MoveValidation.isThisMoveValid(source, destination))
                         result.add(destination);
                 }
-                else if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
-                {
-                    if (MoveValidation.isThisMoveValid(source, destination))
-                        result.add(destination);
+                else {
+                    if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
+                        if (MoveValidation.isThisMoveValid(source, destination))
+                            result.add(destination);
+                    }
+                    break;
                 }
             } else {
                 break;
             }
         }   //left down moves
-        for (int ei = 0; ei < 8; ei++) {
+        for (int ei = 1; ei < 8; ei++) {
             if (i + ei < 8 && j - ei >= 0)//validation
             {
+                System.out.println("ENTER THE BOARD");
                 destination = new Coordinate(i + ei, j - ei);
-                if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
-                {
+                if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
                     if (MoveValidation.isThisMoveValid(source, destination))
                         result.add(destination);
-                } else if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
-                {
-                    if (MoveValidation.isThisMoveValid(source, destination))
-                        result.add(destination);
+                }
+                else {
+                    if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
+                        if (MoveValidation.isThisMoveValid(source, destination))
+                            result.add(destination);
+                    }
+                    break;
                 }
             } else {
                 break;
