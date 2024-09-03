@@ -23,7 +23,6 @@ public class ChessBoard
      */
     public void addSquare(ChessSquare square)
     {
-        System.out.println(square.getI()+" : "+square.getJ());
         if(allPieces.size() <= square.getJ())
         {
             List<ChessSquare> temp = new ArrayList<>();

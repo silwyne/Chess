@@ -78,7 +78,6 @@ public class BoardMaker
         // get the image
         //get the piece enum
         Piece pieceName = getPieceName(row, col, myColor);
-        System.out.println(pieceName);
         Node pieceImage = PiecesImages.getPieceImageInitial(pieceName, pieceColor);
         square.setPiece(pieceName);
         square.getChildren().add(pieceImage);

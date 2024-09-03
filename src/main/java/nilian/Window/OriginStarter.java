@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import nilian.board.BoardMaker;
 import nilian.board.Color;
 
+
 public class OriginStarter extends Application
 {
     static Stage mainStage;
@@ -22,15 +23,22 @@ public class OriginStarter extends Application
         //INITIALIZING THE MAIN STAGE
         mainStage = new Stage();
         //GETTING THE STARTER SCENE
-//        Scene starterScene = getStarterScene();
-        chessBoard = BoardMaker.getInitialBoard(Color.WHITE);
-        Scene scene = new Scene(chessBoard, 640, 640);
-        mainStage.setScene(scene);
+        Scene starterScene = StarterSceneProvider.getScene();
+        mainStage.setScene(starterScene);
         mainStage.show();
     }
 
-//    private static Scene getStarterScene()
-//    {
-//
-//    }
+    public static void setChessScene()
+    {
+        if(chessBoard == null)
+        {
+            try {
+                chessBoard = BoardMaker.getInitialBoard(Color.WHITE);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        Scene scene = new Scene(chessBoard, 640, 640);
+        mainStage.setScene(scene);
+    }
 }
