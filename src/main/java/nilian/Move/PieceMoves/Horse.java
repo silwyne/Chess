@@ -3,7 +3,6 @@ package nilian.Move.PieceMoves;
 import nilian.Move.Coordinate;
 import nilian.board.BoardMaker;
 import nilian.board.ChessSquare;
-import nilian.board.Color;
 import nilian.board.Piece;
 
 import java.util.ArrayList;

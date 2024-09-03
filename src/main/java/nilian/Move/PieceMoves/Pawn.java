@@ -26,10 +26,10 @@ public class Pawn
         Coordinate destination ;
         if(square.getI() == 6 && square.getPieceColor() == Color.WHITE)
         {
-            destination = new Coordinate(i - 2, j);
             //not passing the border
             if(i - 2 >= 0)//validation
             {
+                destination = new Coordinate(i - 2, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination))
                 {
@@ -38,13 +38,12 @@ public class Pawn
                 }
             }
         }
-
         //First pawn two steps for black pawns
         if(square.getI() == 1 && square.getPieceColor() == Color.BLACK)
         {
-            destination = new Coordinate(i + 2, j);
             if(i + 2 < 8 )//not passing the border
             {// validation
+                destination = new Coordinate(i + 2, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination))
                 {
@@ -53,13 +52,12 @@ public class Pawn
                 }
             }
         }
-
         //one straight steps for black pawns
         if(square.getPieceColor() == Color.BLACK)
         {
-            destination = new Coordinate(i + 1, j);
             if(i + 1 < 8)//not passing the border
             {//validation
+                destination = new Coordinate(i + 1, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination))
                 {
@@ -67,13 +65,12 @@ public class Pawn
                 }
             }
         }
-
         //one straight steps for white pawns
         if(square.getPieceColor() == Color.WHITE)
         {
-            destination = new Coordinate(i - 1, j);
             if(i - 1 >= 0)//not passing the border
             {//validation
+                destination = new Coordinate(i - 1, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination))
                 {
@@ -81,13 +78,12 @@ public class Pawn
                 }
             }
         }
-
         //kill the right black pawn
         if(square.getPieceColor() == Color.BLACK)
         {
-            destination = new Coordinate(i + 1, j - 1);
             if(i + 1 < 8 && j - 1 >= 0)
             {
+                destination = new Coordinate(i + 1, j - 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.WHITE
                         &&MoveValidation.isThisMoveValid(source, destination))
@@ -96,13 +92,12 @@ public class Pawn
                 }
             }
         }
-
         //kill the right white pawn
         if(square.getPieceColor() == Color.WHITE)
         {
-            destination = new Coordinate(i - 1, j + 1);
             if(i - 1 >= 0 && j + 1 < 8)
             {
+                destination = new Coordinate(i - 1, j + 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.BLACK
                         &&MoveValidation.isThisMoveValid(source, destination))
@@ -111,13 +106,12 @@ public class Pawn
                 }
             }
         }
-
         //kill the left black pawn
         if(square.getPieceColor() == Color.BLACK)
         {
-            destination = new Coordinate(i + 1, j + 1);
             if(i + 1 < 8 && j + 1 < 8)
             {
+                destination = new Coordinate(i + 1, j + 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.WHITE
                         &&MoveValidation.isThisMoveValid(source, destination))
@@ -126,13 +120,12 @@ public class Pawn
                 }
             }
         }
-
         //kill the left white pawn
         if(square.getPieceColor() == Color.WHITE)
         {
-            destination = new Coordinate(i - 1, j - 1);
             if(i - 1 >= 0 && j - 1 >= 0)
             {
+                destination = new Coordinate(i - 1, j - 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.BLACK
                         &&MoveValidation.isThisMoveValid(source, destination))
