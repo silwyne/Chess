@@ -98,6 +98,9 @@ public class MovementHandler
         // Update the board model
         board.setSquare(new Coordinate(sourceSquare.getI(), sourceSquare.getJ()), sourceSquare);
         board.setSquare(dstCord, destSquare);
+
+        //UPDATE the turn
+        board.nextTurn();
     }
 
     private static String getSquareStyle(int i, int j) {
