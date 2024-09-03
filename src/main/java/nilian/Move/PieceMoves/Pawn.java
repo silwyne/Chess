@@ -33,7 +33,8 @@ public class Pawn
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination))
                 {
-                    result.add(destination);
+                    if(BoardMaker.theBoard.getSquare(new Coordinate(i - 1, j)).getPiece() == Piece.EMPTY)
+                        result.add(destination);
                 }
             }
         }
@@ -47,7 +48,8 @@ public class Pawn
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination))
                 {
-                    result.add(destination);
+                    if(BoardMaker.theBoard.getSquare(new Coordinate(i + 1, j)).getPiece() == Piece.EMPTY)
+                        result.add(destination);
                 }
             }
         }
