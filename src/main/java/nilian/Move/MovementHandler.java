@@ -1,5 +1,7 @@
 package nilian.Move;
 
+import javafx.application.Platform;
+import javafx.scene.Node;
 import nilian.Style.BoardStyles;
 import nilian.board.*;
 
@@ -24,13 +26,13 @@ public class MovementHandler
             {
                 System.out.println("###### STATE CLICK :2: Moving last square to clicked square");
                 moveTheLastSquareToDestination(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
-                possibleMoves.clear();
+                clearPossibleMoves();
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = null ;
             }
             else {
                 System.out.println("###### STATE CLICK :3: extracting possible moves");
-                possibleMoves.clear();
+                clearPossibleMoves();
                 possibleMoves = MoveShower.showMoves(square);
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = square ;
@@ -40,7 +42,7 @@ public class MovementHandler
             if(square.getPiece() != Piece.EMPTY && board.whoTurnIsIt() == square.getPieceColor())
             {
                 System.out.println("###### STATE CLICK :5");
-                possibleMoves.clear();
+                clearPossibleMoves();
                 possibleMoves = MoveShower.showMoves(square);
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = square;
@@ -48,11 +50,19 @@ public class MovementHandler
             {
                 System.out.println("###### STATE CLICK :6");
                 turnEmpty(square.getCoordinate());
-                possibleMoves.clear();
+                clearPossibleMoves();
                 lastSquareClicked = null;
             }
         }
         possibleMoves.forEach(e -> System.out.println("Possible move: "+e.toString()));
+    }
+
+    private static void clearPossibleMoves()
+    {
+        if(!possibleMoves.isEmpty())
+        {
+            possibleMoves.clear();
+        }
     }
 
 
@@ -68,32 +78,30 @@ public class MovementHandler
     }
 
 
-    private static void moveTheLastSquareToDestination(ChessSquare square, Coordinate dstCord)
-    {
+    private static void moveTheLastSquareToDestination(ChessSquare sourceSquare, Coordinate dstCord) {
         System.out.println("MOVEMENT IS CALLED");
-        ChessSquare emptySquare = new ChessSquare(square.getI(), square.getJ(), square.getBoard());
-        emptySquare.setPiece(Piece.EMPTY);
-        String emptyStyle ;
-        if ((emptySquare.getI() + emptySquare.getJ()) % 2 == 0) {
-            emptyStyle = BoardStyles.getWhiteColor();
-        } else {
-            emptyStyle = BoardStyles.getBlackColor();
-        }
-        updateSquareStyle(emptySquare, emptyStyle);
+        ChessBoard board = sourceSquare.getBoard();
+        // Get the destination square
+        ChessSquare destSquare = board.getSquare(dstCord);
 
-        //extracting picture
-//        Node piecePicture = square.getChildren().get(0);
-//        ChessSquare newSquare = new ChessSquare(dstCord.i, dstCord.j, square.getBoard());
-//        newSquare.getChildren().add(piecePicture);
-//        newSquare.setPiece(square.getPiece());
-//        newSquare.setPieceColor(square.getPieceColor());
-//        String newStyle ;
-//        if ((newSquare.getI() + newSquare.getJ()) % 2 == 0) {
-//            newStyle = BoardStyles.getWhiteColor();
-//        } else {
-//            newStyle = BoardStyles.getBlackColor();
-//        }
-//        updateSquareStyle(newSquare, newStyle);
+        // Move the piece to the destination square
+        Node piecePicture = sourceSquare.getChildren().get(0);
+        destSquare.getChildren().clear();
+        destSquare.getChildren().add(piecePicture);
+        destSquare.setPiece(sourceSquare.getPiece());
+        // Clear the source square
+        sourceSquare.setPiece(Piece.EMPTY);
+        destSquare.setPieceColor(sourceSquare.getPieceColor());
+        updateSquareStyle(sourceSquare, getSquareStyle(sourceSquare.getI(), sourceSquare.getJ()));
+        updateSquareStyle(destSquare, getSquareStyle(dstCord.i, dstCord.j));
+
+        // Update the board model
+        board.setSquare(new Coordinate(sourceSquare.getI(), sourceSquare.getJ()), sourceSquare);
+        board.setSquare(dstCord, destSquare);
+    }
+
+    private static String getSquareStyle(int i, int j) {
+        return (i + j) % 2 == 0 ? BoardStyles.getWhiteColor() : BoardStyles.getBlackColor();
     }
 
 
