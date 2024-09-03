@@ -8,6 +8,7 @@ import javafx.scene.layout.RowConstraints;
 
 
 import nilian.Pieces.PiecesImages;
+import nilian.Style.BoardStyles;
 
 public class BoardMaker
 {

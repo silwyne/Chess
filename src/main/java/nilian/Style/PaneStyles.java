@@ -1,4 +1,4 @@
-package nilian.board;
+package nilian.Style;
 
 public class PaneStyles
 {
@@ -58,10 +58,43 @@ public class PaneStyles
                     "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.1, 0, 1);" +
                     "-fx-background-insets: 1;";
 
-    public static String getStyle(String colorCode)
+    public static String getStyle(StyleSelector styleFrame, String colorCode)
     {
+        String cssCode = getStyleCss(styleFrame);
         // example: colorCode = "#FFFFFF" or "#000000"
-        String style = String.format(frostedGlassSquareStyle, colorCode);
-        return style ;
+        return String.format(cssCode, colorCode);
+    }
+
+    private static String getStyleCss(StyleSelector styleFrame)
+    {
+        if(styleFrame == StyleSelector.MARBLE)
+        {
+            return marbleSquareStyle;
+
+        }else if(styleFrame == StyleSelector.CLASSIC)
+        {
+            return classicSquareStyle;
+
+        }else if(styleFrame == StyleSelector.FROSTED_GLASS)
+        {
+            return frostedGlassSquareStyle;
+
+        }else if(styleFrame == StyleSelector.METALLIC)
+        {
+            return metallicSquareStyle;
+
+        }else if(styleFrame == StyleSelector.MODERN)
+        {
+            return modernSquareStyle;
+
+        }else if(styleFrame == StyleSelector.NEON)
+        {
+            return neonSquareStyle;
+
+        }else if(styleFrame == StyleSelector.WOODEN)
+        {
+            return woodenSquareStyle;
+        }
+        return "shit";
     }
 }

@@ -1,4 +1,4 @@
-package nilian.board;
+package nilian.Style;
 
 public class BoardStyles
 {

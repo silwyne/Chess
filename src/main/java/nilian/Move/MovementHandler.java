@@ -1,6 +1,6 @@
 package nilian.Move;
 
-import javafx.scene.Node;
+import nilian.Style.BoardStyles;
 import nilian.board.*;
 
 import java.util.ArrayList;
