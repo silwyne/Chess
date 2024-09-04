@@ -1,7 +1,8 @@
-package nilian.Move.PieceMoves;
+package nilian.Move.Validation;
 
 import nilian.Move.Coordinate;
 import nilian.Move.Move;
+import nilian.Move.PieceMoves.Horse;
 import nilian.board.ChessBoard;
 import nilian.board.ChessSquare;
 import nilian.board.Color;
@@ -114,10 +115,55 @@ public class MoveValidation
             }
         }
 
-        //CHECK FOR HORSE
-        List<Move> horseMoves = Horse.calculatePossibleMoves(ki, kj)
+        //GET HORSE LOCATIONS
+        List<Coordinate> horseLocation = HorseMove.calculateOnBoardMoves(kingCoordinate);
+        //CHECK FOR HORSES
+        if(isEnemyThere(horseLocation, Piece.HORSE))
+        {
+            System.out.println("An ENEMY HORSE IS SEEN");
+            return false;//in danger
+        }
 
-        return true;
+        //GET BISHOP LOCATIONS
+        List<Coordinate> bishopLocation = BishopMove.calculateOnBoardMoves(kingCoordinate);
+        //CHECK FOR BISHOPS
+        if(isEnemyThere(bishopLocation, Piece.BISHOP))
+        {
+            System.out.println("An ENEMY BISHOP IS SEEN");
+            return false;//in danger
+        }
+        //CHECK FOR QUEEN
+        if(isEnemyThere(bishopLocation, Piece.QUEEN))
+        {
+            System.out.println("An ENEMY QUEEN IS SEEN");
+            return false;//in danger
+        }
+
+        //GET ROOK LOCATIONS
+        List<Coordinate> rookLocation = RookMove.calculateOnBoardMoves(kingCoordinate);
+        //CHECK FOR BISHOPS
+        if(isEnemyThere(rookLocation, Piece.ROOK))
+        {
+            System.out.println("An ENEMY ROOK IS SEEN");
+            return false;//in danger
+        }
+        //CHECK FOR QUEEN
+        if(isEnemyThere(rookLocation, Piece.QUEEN))
+        {
+            System.out.println("An ENEMY QUEEN IS SEEN");
+            return false;//in danger
+        }
+
+        //GET KING LOCATIONS
+        List<Coordinate> kingLocation = KingMove.calculateOnBoardMoves(kingCoordinate);
+        //CHECK FOR KING
+        if(isEnemyThere(kingLocation, Piece.KING))
+        {
+            System.out.println("An ENEMY KING IS SEEN");
+            return false;//in danger
+        }
+        System.out.println("move is safe");
+        return true;//safe
     }
 
     private static ChessSquare getSquare(Coordinate cord)
@@ -135,5 +181,26 @@ public class MoveValidation
             return result;
         }
         return board.getSquare(cord);
+    }
+
+    /**
+     * Returns true if there is the enemy
+     * @param cors the list of expected location for the enemy
+     * @param piece the enemy kind we seek there
+     * @return true if there is the enemy
+     */
+    private static boolean isEnemyThere(List<Coordinate> cors, Piece piece)
+    {
+        ChessSquare checkSquare;
+        for(Coordinate cord : cors)
+        {
+            checkSquare = getSquare(cord);
+            if(checkSquare.getPieceColor() != friendColor
+            && checkSquare.getPiece() == piece)
+            {
+                return true ;//enemy is seen
+            }
+        }
+        return false;//no enemy is seen
     }
 }
