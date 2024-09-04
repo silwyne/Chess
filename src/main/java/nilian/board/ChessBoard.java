@@ -44,7 +44,6 @@ public class ChessBoard
      */
     public ChessSquare getSquare(Coordinate cord)
     {
-        System.out.println("get square: "+cord.toString());
         return allPieces.get(cord.i).get(cord.j);
     }
 
