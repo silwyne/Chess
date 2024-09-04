@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import nilian.board.BoardMaker;
 import nilian.board.Color;
+import nilian.board.SizeEntity;
 
 
 public class OriginStarter extends Application
@@ -38,7 +39,7 @@ public class OriginStarter extends Application
                 throw new RuntimeException(e);
             }
         }
-        Scene scene = new Scene(chessBoard, 640, 640);
+        Scene scene = new Scene(chessBoard, SizeEntity.GameWindow_width, SizeEntity.GameWindow_height);
         mainStage.setScene(scene);
     }
 }
