@@ -11,7 +11,13 @@ public class Queen
      *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.
      * @return a list of possible coordinates
      */
-    public static List<Coordinate> calculatePossibleMoves(ChessSquare square) {
-        return List.of();
+    public static List<Coordinate> calculatePossibleMoves(ChessSquare square)
+    {
+        //the bishop moves
+        List<Coordinate> result = Bishop.calculatePossibleMoves(square);
+        //and the rook moves
+        result.addAll(Rook.calculatePossibleMoves(square));
+
+        return result;
     }
 }
