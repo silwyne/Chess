@@ -91,7 +91,6 @@ public class MovementHandler
         destSquare.setPiece(sourceSquare.getPiece());
         // Clear the source square
         sourceSquare.setPiece(Piece.EMPTY);
-        sourceSquare.setPieceColor(null);
         destSquare.setPieceColor(sourceSquare.getPieceColor());
         updateSquareStyle(sourceSquare, getSquareStyle(sourceSquare.getI(), sourceSquare.getJ()));
         updateSquareStyle(destSquare, getSquareStyle(dstCord.i, dstCord.j));
