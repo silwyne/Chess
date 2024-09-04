@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 
+import nilian.Move.Coordinate;
 import nilian.Pieces.PiecesImages;
 import nilian.Style.BoardStyles;
 
@@ -82,6 +83,12 @@ public class BoardMaker
         Node pieceImage = PiecesImages.getPieceImageInitial(pieceName, pieceColor);
         square.setPiece(pieceName);
         square.getChildren().add(pieceImage);
+
+        //if its is king so initialize the king coordinate
+        if(pieceName == Piece.KING)
+        {
+            theBoard.updateBoardKingCoordinates(pieceColor, new Coordinate(row, col));
+        }
 
         return square;
     }
