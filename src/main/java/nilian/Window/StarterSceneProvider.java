@@ -22,8 +22,8 @@ public class StarterSceneProvider
 
         //Default value
         //Note: you must set the Default value to a value that already exists!!
-        styleBox.setValue("MODERN");
-        themeBox.setValue("BLUE_AND_GRAY");
+        styleBox.setValue("MARBLE");
+        themeBox.setValue("GLASS");
         //notice on click
         styleBox.getSelectionModel().selectedItemProperty();
 
