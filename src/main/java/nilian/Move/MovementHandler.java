@@ -20,34 +20,33 @@ public class MovementHandler
     {
         if(!possibleMoves.isEmpty())
         {
-            System.out.println("###### STATE CLICK :1 : No Square is clicked before");
+            //Check for movement
             if(checkForMovement(square))
             {
-                System.out.println("###### STATE CLICK :2: Moving last square to clicked square");
+                //moving the square
                 moveTheLastSquareToDestination(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
                 clearPossibleMoves();
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = null ;
             }
+            //check for showing possible moves
             else if(square.getPieceColor() == board.whoTurnIsIt()) {
-                System.out.println("###### STATE CLICK :3: extracting possible moves");
                 clearPossibleMoves();
                 possibleMoves = MoveShower.showMoves(square);
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = square ;
             }
         } else {
-            System.out.println("###### STATE CLICK :4: ");
+            //check for show possible moves
             if(square.getPiece() != Piece.EMPTY && board.whoTurnIsIt() == square.getPieceColor())
             {
-                System.out.println("###### STATE CLICK :5");
                 clearPossibleMoves();
                 possibleMoves = MoveShower.showMoves(square);
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = square;
+            //check for empty click
             } else if(square.getPiece() == Piece.EMPTY)
             {
-                System.out.println("###### STATE CLICK :6");
                 turnEmpty(square.getCoordinate());
                 clearPossibleMoves();
                 lastSquareClicked = null;
@@ -66,7 +65,6 @@ public class MovementHandler
 
     private static boolean checkForMovement(ChessSquare destinationSquare)
     {
-        System.out.println("CHECKING FOR MOVEMENT");
         for (Move possibleMove : possibleMoves) {
             if (possibleMove.dstCord.equalsCoordinate(destinationSquare.getI(), destinationSquare.getJ())) {
                 return true;
@@ -77,7 +75,6 @@ public class MovementHandler
 
 
     private static void moveTheLastSquareToDestination(ChessSquare sourceSquare, Coordinate dstCord) {
-        System.out.println("MOVEMENT IS CALLED");
         ChessBoard board = sourceSquare.getBoard();
         // Get the destination square
         ChessSquare destSquare = board.getSquare(dstCord);
