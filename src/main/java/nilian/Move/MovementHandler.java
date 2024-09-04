@@ -29,7 +29,7 @@ public class MovementHandler
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = null ;
             }
-            else {
+            else if(square.getPieceColor() == board.whoTurnIsIt()) {
                 System.out.println("###### STATE CLICK :3: extracting possible moves");
                 clearPossibleMoves();
                 possibleMoves = MoveShower.showMoves(square);
