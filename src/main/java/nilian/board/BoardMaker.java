@@ -50,9 +50,10 @@ public class BoardMaker
                 }
 
                 //color thing
-                String style = (myColor == Color.WHITE) ^ ((row + col) % 2 == 0) ?
+                boolean b = (myColor == Color.WHITE) ^ ((row + col) % 2 == 0);
+                String style = b ?
                         BoardStyles.getBlackColor() : BoardStyles.getWhiteColor();
-                Color squareColor = (myColor == Color.WHITE) ^ ((row + col) % 2 == 0) ?
+                Color squareColor = b ?
                         Color.BLACK : Color.WHITE;
 
                 square.setStyle(style);

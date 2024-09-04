@@ -3,6 +3,7 @@ package nilian.Window;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import nilian.board.BoardMaker;
 import nilian.board.Color;
@@ -31,6 +32,7 @@ public class OriginStarter extends Application
 
     public static void setChessScene()
     {
+        //getting the chess board
         if(chessBoard == null)
         {
             try {
@@ -39,7 +41,10 @@ public class OriginStarter extends Application
                 throw new RuntimeException(e);
             }
         }
-        Scene scene = new Scene(chessBoard, SizeEntity.GameWindow_width, SizeEntity.GameWindow_height);
+        //getting other stuff
+        HBox hbox = new HBox();
+        hbox.getChildren().add(chessBoard);
+        Scene scene = new Scene(hbox, SizeEntity.GameWindow_width, SizeEntity.GameWindow_height);
         mainStage.setScene(scene);
     }
 }
