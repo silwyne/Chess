@@ -13,6 +13,12 @@ public class ChessBoard
     private final List<List<ChessSquare>> allPieces = new ArrayList<>();
 
     /*
+    Kings Coordinates
+     */
+    private Coordinate blackKingCoordinate;
+    private Coordinate whiteKingCoordinate;
+
+    /*
     Who is turn is it now ? white or black?
     Initial value is WHITE at the beginning of the game.
      */
@@ -75,5 +81,33 @@ public class ChessBoard
         } else {
             turnColor = Color.BLACK;
         }
+    }
+
+    /**
+     * This function gets called from MovementHandler.Class
+     * When a king is moved this function updates it Coordinate
+     * @param color color of the king to update
+     * @param coordinate new coordinate
+     */
+    public void updateBoardKingCoordinates(Color color, Coordinate coordinate)
+    {
+        if(color == Color.BLACK)
+        {
+            blackKingCoordinate = coordinate;
+        }
+        whiteKingCoordinate = coordinate;
+    }
+    /**
+     * returns the king Coordinate based on the specified Color
+     * @param color color of the king you want
+     * @return Coordinate of the king
+     */
+    public Coordinate getKingCoordinate(Color color)
+    {
+        if(color == Color.BLACK)
+        {
+            return blackKingCoordinate;
+        }
+        return whiteKingCoordinate;
     }
 }
