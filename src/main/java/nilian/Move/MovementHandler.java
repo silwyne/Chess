@@ -53,7 +53,6 @@ public class MovementHandler
                 lastSquareClicked = null;
             }
         }
-        possibleMoves.forEach(e -> System.out.println("Possible move: "+e.toString()));
     }
 
     private static void clearPossibleMoves()
