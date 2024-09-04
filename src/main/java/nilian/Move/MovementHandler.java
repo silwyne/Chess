@@ -101,6 +101,12 @@ public class MovementHandler
 
         //UPDATE the turn
         board.nextTurn();
+
+        //if the piece is king update the king coordinate
+        if(destSquare.getPiece() == Piece.KING)
+        {
+            board.updateBoardKingCoordinates(destSquare.getPieceColor(), dstCord);
+        }
     }
 
     private static String getSquareStyle(int i, int j) {
