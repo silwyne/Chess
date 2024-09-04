@@ -1,6 +1,5 @@
 package nilian.Move;
 
-import javafx.application.Platform;
 import javafx.scene.Node;
 import nilian.Style.BoardStyles;
 import nilian.board.*;
@@ -12,8 +11,8 @@ import java.util.Set;
 
 public class MovementHandler
 {
-    private static List<Coordinate> possibleMoves = new ArrayList<>();
-    private static Set<Coordinate> highlightedSquares = new HashSet<>();
+    private static List<Move> possibleMoves = new ArrayList<>();
+    private static Set<Move> highlightedSquares = new HashSet<>();
     private static Coordinate emptyLight ;
     private static ChessSquare lastSquareClicked;
 
@@ -69,8 +68,8 @@ public class MovementHandler
     private static boolean checkForMovement(ChessSquare destinationSquare)
     {
         System.out.println("CHECKING FOR MOVEMENT");
-        for (Coordinate possibleMove : possibleMoves) {
-            if (possibleMove.equalsCoordinate(destinationSquare.getI(), destinationSquare.getJ())) {
+        for (Move possibleMove : possibleMoves) {
+            if (possibleMove.dstCord.equalsCoordinate(destinationSquare.getI(), destinationSquare.getJ())) {
                 return true;
             }
         }
@@ -134,32 +133,37 @@ public class MovementHandler
         updateSquareStyle(currentSquare, BoardStyles.getPossibleStyle());
     }
 
-    private static void turnLights(Set<Coordinate> newPossibleMoves) {
-        Set<Coordinate> squaresToTurnOn = new HashSet<>(newPossibleMoves);
+    private static void turnLights(Set<Move> newPossibleMoves) {
+        Set<Move> squaresToTurnOn = new HashSet<>(newPossibleMoves);
         squaresToTurnOn.removeAll(highlightedSquares);
 
-        Set<Coordinate> squaresToTurnOff = new HashSet<>(highlightedSquares);
+        Set<Move> squaresToTurnOff = new HashSet<>(highlightedSquares);
         squaresToTurnOff.removeAll(newPossibleMoves);
         if(emptyLight != null)
         {
-            squaresToTurnOff.add(emptyLight);
+            squaresToTurnOff.add(new Move(emptyLight, MoveName.MOVE));
         }
 
         // Turn off lights
-        for (Coordinate cord : squaresToTurnOff) {
-            ChessSquare square = BoardMaker.theBoard.getSquare(cord);
+        for (Move move : squaresToTurnOff) {
+            ChessSquare square = BoardMaker.theBoard.getSquare(move.dstCord);
             String style;
             // If the sum of row and column is even, it's a white square, otherwise it's black
-            if ((cord.i + cord.j) % 2 == 0)
+            if ((move.dstCord.i + move.dstCord.j) % 2 == 0)
             { style = BoardStyles.getWhiteColor();
             } else {style = BoardStyles.getBlackColor();}
             updateSquareStyle(square, style);
         }
 
         // Turn on lights
-        for (Coordinate cord : squaresToTurnOn) {
-            ChessSquare square = BoardMaker.theBoard.getSquare(cord);
-            updateSquareStyle(square, BoardStyles.getPossibleStyle());
+        for (Move move : squaresToTurnOn) {
+            ChessSquare square = BoardMaker.theBoard.getSquare(move.dstCord);
+            if(move.moveName== MoveName.MOVE)
+            {
+                updateSquareStyle(square, BoardStyles.getPossibleStyle());
+            } else {
+                updateSquareStyle(square, BoardStyles.getKillStyle());
+            }
         }
 
         // Update the set of highlighted squares

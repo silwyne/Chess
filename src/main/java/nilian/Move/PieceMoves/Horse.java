@@ -1,6 +1,8 @@
 package nilian.Move.PieceMoves;
 
 import nilian.Move.Coordinate;
+import nilian.Move.Move;
+import nilian.Move.MoveName;
 import nilian.board.BoardMaker;
 import nilian.board.ChessSquare;
 import nilian.board.Piece;
@@ -14,10 +16,10 @@ public class Horse
      *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.
      * @return a list of possible coordinates
      */
-    public static List<Coordinate> calculatePossibleMoves(ChessSquare square)
+    public static List<Move> calculatePossibleMoves(ChessSquare square)
     {
         System.out.println("HORSE MOVE IS CALLED");
-        List<Coordinate> result = new ArrayList<>();
+        List<Move> result = new ArrayList<>();
         int i = square.getI();
         int j = square.getJ();
         Coordinate source = new Coordinate(i, j);
@@ -30,12 +32,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //left up : 2 up 1 left
@@ -45,12 +47,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //right down : 2 down 1 right
@@ -60,12 +62,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //left down : 2 down 1 left
@@ -75,12 +77,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //right UPPER : 1 up 2 right
@@ -90,12 +92,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //right DOWNER : 1 down 2 right
@@ -105,12 +107,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //left UPPER : 1 up 2 left
@@ -120,12 +122,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         //left DOWNER : 1 down 2 left
@@ -135,12 +137,12 @@ public class Horse
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
                 if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
             }
         }
         return result;

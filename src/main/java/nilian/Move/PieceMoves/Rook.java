@@ -1,6 +1,8 @@
 package nilian.Move.PieceMoves;
 
 import nilian.Move.Coordinate;
+import nilian.Move.Move;
+import nilian.Move.MoveName;
 import nilian.board.BoardMaker;
 import nilian.board.ChessSquare;
 import nilian.board.Piece;
@@ -14,9 +16,9 @@ public class Rook
      *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.
      * @return a list of possible coordinates
      */
-    public static List<Coordinate> calculatePossibleMoves(ChessSquare square) {
+    public static List<Move> calculatePossibleMoves(ChessSquare square) {
         System.out.println("ROOK MOVE IS CALLED");
-        List<Coordinate> result = new ArrayList<>();
+        List<Move> result = new ArrayList<>();
         int i = square.getI();
         int j = square.getJ();
         Coordinate source = new Coordinate(i, j);
@@ -30,11 +32,11 @@ public class Rook
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
                 {
                     if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                        result.add(destination);
+                        result.add(new Move(destination, MoveName.MOVE));
                 } else {
                     if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
                         if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                            result.add(destination);
+                            result.add(new Move(destination, MoveName.MOVE));
                     }
                     break;
                 }
@@ -49,12 +51,12 @@ public class Rook
                 destination = new Coordinate(i, j - ei);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
                     if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                        result.add(destination);
+                        result.add(new Move(destination, MoveName.MOVE));
                 }
                 else {
                     if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
                         if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                            result.add(destination);
+                            result.add(new Move(destination, MoveName.KILL));
                     }
                     break;
                 }
@@ -68,12 +70,12 @@ public class Rook
                 destination = new Coordinate(i - ei, j);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
                     if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                        result.add(destination);
+                        result.add(new Move(destination, MoveName.MOVE));
                 }
                 else {
                     if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
                         if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                            result.add(destination);
+                            result.add(new Move(destination, MoveName.KILL));
                     }
                     break;
                 }
@@ -87,12 +89,12 @@ public class Rook
                 destination = new Coordinate(i + ei, j);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
                     if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                        result.add(destination);
+                        result.add(new Move(destination, MoveName.MOVE));
                 }
                 else {
                     if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
                         if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
-                            result.add(destination);
+                            result.add(new Move(destination, MoveName.KILL));
                     }
                     break;
                 }

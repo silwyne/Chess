@@ -8,9 +8,9 @@ import java.util.List;
 
 public class MoveShower
 {
-    public static List<Coordinate> showMoves(ChessSquare square)
+    public static List<Move> showMoves(ChessSquare square)
     {
-        List<Coordinate> possibleMoves = null ;
+        List<Move> possibleMoves = null ;
         switch (square.getPiece())
         {
             case BISHOP -> possibleMoves = Bishop.calculatePossibleMoves(square);

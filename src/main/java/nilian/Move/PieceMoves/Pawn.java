@@ -1,6 +1,8 @@
 package nilian.Move.PieceMoves;
 
 import nilian.Move.Coordinate;
+import nilian.Move.Move;
+import nilian.Move.MoveName;
 import nilian.board.BoardMaker;
 import nilian.board.ChessSquare;
 import nilian.board.Color;
@@ -15,9 +17,9 @@ public class Pawn
      *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.
      * @return a list of possible coordinates
      */
-    public static List<Coordinate> calculatePossibleMoves(ChessSquare square) {
+    public static List<Move> calculatePossibleMoves(ChessSquare square) {
         System.out.println("PAWN MOVE IS CALLED");
-        List<Coordinate> result = new ArrayList<>();
+        List<Move> result = new ArrayList<>();
         int i = square.getI();
         int j = square.getJ();
         Coordinate source = new Coordinate(i, j);
@@ -34,7 +36,7 @@ public class Pawn
                         && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     if(BoardMaker.theBoard.getSquare(new Coordinate(i - 1, j)).getPiece() == Piece.EMPTY)
-                        result.add(destination);
+                        result.add(new Move(destination, MoveName.MOVE));
                 }
             }
         }
@@ -48,7 +50,7 @@ public class Pawn
                         && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     if(BoardMaker.theBoard.getSquare(new Coordinate(i + 1, j)).getPiece() == Piece.EMPTY)
-                        result.add(destination);
+                        result.add(new Move(destination, MoveName.MOVE));
                 }
             }
         }
@@ -61,7 +63,7 @@ public class Pawn
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
                 }
             }
         }
@@ -74,7 +76,7 @@ public class Pawn
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
                         && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.MOVE));
                 }
             }
         }
@@ -88,7 +90,7 @@ public class Pawn
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.WHITE
                         &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
                 }
             }
         }
@@ -102,7 +104,7 @@ public class Pawn
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.BLACK
                         &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
                 }
             }
         }
@@ -116,7 +118,7 @@ public class Pawn
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.WHITE
                         &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
                 }
             }
         }
@@ -130,7 +132,7 @@ public class Pawn
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.BLACK
                         &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
-                    result.add(destination);
+                    result.add(new Move(destination, MoveName.KILL));
                 }
             }
         }
