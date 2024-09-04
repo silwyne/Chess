@@ -29,11 +29,11 @@ public class Rook
                 destination = new Coordinate(i, j + ei);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
                 {
-                    if (MoveValidation.isThisMoveValid(source, destination))
+                    if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                         result.add(destination);
                 } else {
                     if (BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
-                        if (MoveValidation.isThisMoveValid(source, destination))
+                        if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                             result.add(destination);
                     }
                     break;
@@ -48,12 +48,12 @@ public class Rook
             {
                 destination = new Coordinate(i, j - ei);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
-                    if (MoveValidation.isThisMoveValid(source, destination))
+                    if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                         result.add(destination);
                 }
                 else {
                     if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
-                        if (MoveValidation.isThisMoveValid(source, destination))
+                        if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                             result.add(destination);
                     }
                     break;
@@ -67,12 +67,12 @@ public class Rook
             {
                 destination = new Coordinate(i - ei, j);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
-                    if (MoveValidation.isThisMoveValid(source, destination))
+                    if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                         result.add(destination);
                 }
                 else {
                     if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
-                        if (MoveValidation.isThisMoveValid(source, destination))
+                        if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                             result.add(destination);
                     }
                     break;
@@ -86,12 +86,12 @@ public class Rook
             {
                 destination = new Coordinate(i + ei, j);
                 if (BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY) {
-                    if (MoveValidation.isThisMoveValid(source, destination))
+                    if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                         result.add(destination);
                 }
                 else {
                     if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor()) {
-                        if (MoveValidation.isThisMoveValid(source, destination))
+                        if (MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                             result.add(destination);
                     }
                     break;

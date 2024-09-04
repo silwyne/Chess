@@ -29,12 +29,12 @@ public class King
             destination = new Coordinate(i, j + 1);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -44,12 +44,12 @@ public class King
             destination = new Coordinate(i, j - 1);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -59,12 +59,12 @@ public class King
             destination = new Coordinate(i - 1, j);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -74,12 +74,12 @@ public class King
             destination = new Coordinate(i + 1, j);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -89,12 +89,12 @@ public class King
             destination = new Coordinate(i - 1, j + 1);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -104,12 +104,12 @@ public class King
             destination = new Coordinate(i + 1, j + 1);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -119,12 +119,12 @@ public class King
             destination = new Coordinate(i - 1, j - 1);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }
@@ -134,12 +134,12 @@ public class King
             destination = new Coordinate(i + 1, j - 1);
             if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY)
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
             else if(BoardMaker.theBoard.getSquare(destination).getPieceColor() != square.getPieceColor())
             {
-                if(MoveValidation.isThisMoveValid(source, destination))
+                if(MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                     result.add(destination);
             }
         }

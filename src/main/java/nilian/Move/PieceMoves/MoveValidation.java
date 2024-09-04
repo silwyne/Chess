@@ -1,6 +1,7 @@
 package nilian.Move.PieceMoves;
 
 import nilian.Move.Coordinate;
+import nilian.board.ChessBoard;
 
 public class MoveValidation
 {
@@ -12,7 +13,7 @@ public class MoveValidation
      * @param source the coordinate of where the piece is now
      * @return true if king stays safe
      */
-    public static boolean isThisMoveValid(Coordinate source, Coordinate destination)
+    public static boolean isThisMoveValid(Coordinate source, Coordinate destination, ChessBoard board)
     {
         return true;
     }

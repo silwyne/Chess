@@ -31,7 +31,7 @@ public class Pawn
             {
                 destination = new Coordinate(i - 2, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
-                        && MoveValidation.isThisMoveValid(source, destination))
+                        && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     if(BoardMaker.theBoard.getSquare(new Coordinate(i - 1, j)).getPiece() == Piece.EMPTY)
                         result.add(destination);
@@ -45,7 +45,7 @@ public class Pawn
             {// validation
                 destination = new Coordinate(i + 2, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
-                        && MoveValidation.isThisMoveValid(source, destination))
+                        && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     if(BoardMaker.theBoard.getSquare(new Coordinate(i + 1, j)).getPiece() == Piece.EMPTY)
                         result.add(destination);
@@ -59,7 +59,7 @@ public class Pawn
             {//validation
                 destination = new Coordinate(i + 1, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
-                        && MoveValidation.isThisMoveValid(source, destination))
+                        && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     result.add(destination);
                 }
@@ -72,7 +72,7 @@ public class Pawn
             {//validation
                 destination = new Coordinate(i - 1, j);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() == Piece.EMPTY
-                        && MoveValidation.isThisMoveValid(source, destination))
+                        && MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     result.add(destination);
                 }
@@ -86,7 +86,7 @@ public class Pawn
                 destination = new Coordinate(i + 1, j - 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.WHITE
-                        &&MoveValidation.isThisMoveValid(source, destination))
+                        &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     result.add(destination);
                 }
@@ -100,7 +100,7 @@ public class Pawn
                 destination = new Coordinate(i - 1, j + 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.BLACK
-                        &&MoveValidation.isThisMoveValid(source, destination))
+                        &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     result.add(destination);
                 }
@@ -114,7 +114,7 @@ public class Pawn
                 destination = new Coordinate(i + 1, j + 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.WHITE
-                        &&MoveValidation.isThisMoveValid(source, destination))
+                        &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     result.add(destination);
                 }
@@ -128,7 +128,7 @@ public class Pawn
                 destination = new Coordinate(i - 1, j - 1);
                 if(BoardMaker.theBoard.getSquare(destination).getPiece() != Piece.EMPTY
                         && BoardMaker.theBoard.getSquare(destination).getPieceColor() == Color.BLACK
-                        &&MoveValidation.isThisMoveValid(source, destination))
+                        &&MoveValidation.isThisMoveValid(source, destination, square.getBoard()))
                 {
                     result.add(destination);
                 }
