@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MovementHandler
+public class ClickHandler
 {
     private static List<Move> possibleMoves = new ArrayList<>();
     private static Set<Move> highlightedSquares = new HashSet<>();
