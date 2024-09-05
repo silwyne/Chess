@@ -14,6 +14,7 @@ public class MovementHandler
 {
     private static List<Move> possibleMoves = new ArrayList<>();
     private static Set<Move> highlightedSquares = new HashSet<>();
+    private static Coordinate checkLight ;
     private static Coordinate emptyLight ;
     private static ChessSquare lastSquareClicked;
 
@@ -85,6 +86,19 @@ public class MovementHandler
 
 
     private static void moveTheLastSquareToDestination(ChessSquare sourceSquare, Coordinate dstCord) {
+        //if check light is on so we put it off
+        if(checkLight != null)
+        {
+            System.out.println("Turn Off Check Light");
+            //Turn off check light
+            String style;
+            // If the sum of row and column is even, it's a white square, otherwise it's black
+            if ((checkLight.i + checkLight.j) % 2 == 0)
+            { style = BoardStyles.getWhiteColor();
+            } else {style = BoardStyles.getBlackColor();}
+            updateSquareStyle( BoardMaker.theBoard.getSquare(checkLight), style);
+            checkLight = null;
+        }
         ChessBoard board = sourceSquare.getBoard();
         // Get the destination square
         ChessSquare destSquare = board.getSquare(dstCord);
@@ -122,6 +136,7 @@ public class MovementHandler
             String checkStyle = BoardStyles.getCheckStyle();
             //update style to check
             updateSquareStyle(board.getSquare(kingCoordinate), checkStyle);
+            checkLight = kingCoordinate;
         }
     }
 
@@ -151,7 +166,8 @@ public class MovementHandler
         updateSquareStyle(currentSquare, BoardStyles.getEmptyStyle());
     }
 
-    private static void turnLights(Set<Move> newPossibleMoves) {
+    private static void turnLights(Set<Move> newPossibleMoves)
+    {
         Set<Move> squaresToTurnOn = new HashSet<>(newPossibleMoves);
         squaresToTurnOn.removeAll(highlightedSquares);
 
