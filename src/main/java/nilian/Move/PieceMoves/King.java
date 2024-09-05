@@ -19,7 +19,6 @@ public class King
      */
     public static List<Move> calculatePossibleMoves(ChessSquare square)
     {
-        System.out.println("KING MOVE IS CALLED");
         List<Move> result = new ArrayList<>();
         int i = square.getI();
         int j = square.getJ();

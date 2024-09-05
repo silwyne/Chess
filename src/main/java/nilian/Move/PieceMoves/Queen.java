@@ -1,6 +1,5 @@
 package nilian.Move.PieceMoves;
 
-import nilian.Move.Coordinate;
 import nilian.Move.Move;
 import nilian.board.ChessSquare;
 

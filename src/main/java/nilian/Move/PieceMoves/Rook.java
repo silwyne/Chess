@@ -18,7 +18,6 @@ public class Rook
      * @return a list of possible coordinates
      */
     public static List<Move> calculatePossibleMoves(ChessSquare square) {
-        System.out.println("ROOK MOVE IS CALLED");
         List<Move> result = new ArrayList<>();
         int i = square.getI();
         int j = square.getJ();

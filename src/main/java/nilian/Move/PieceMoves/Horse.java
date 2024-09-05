@@ -19,7 +19,6 @@ public class Horse
      */
     public static List<Move> calculatePossibleMoves(ChessSquare square)
     {
-        System.out.println("HORSE MOVE IS CALLED");
         List<Move> result = new ArrayList<>();
         int i = square.getI();
         int j = square.getJ();

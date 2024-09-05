@@ -51,11 +51,7 @@ public class MoveValidation
         if(source.equalsCoordinate(kingCoordinate))
         {
             kingCoordinate = dst_cord;
-            System.out.println("KING COORDINATE IS DESTINATION CORD");
-        } else {
-            System.out.println("MOVER IS NOT KING!");
         }
-        System.out.println("CHECK KING IN DANGER FOR CORD: "+ kingCoordinate.toString());
         //finally in both situations the source is considered empty
         //and the dst is considered the mover or the friend
         //that is why we take squares from our own function which filters the result
@@ -64,40 +60,34 @@ public class MoveValidation
         //CHECK FOR ENEMY PAWN
         if(PawnMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.PAWN))
         {
-            System.out.println("An ENEMY PAWN IS SEEN");
             return false;//in danger
         }
 
         //CHECK FOR HORSES
         if(HorseMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.HORSE))
         {
-            System.out.println("An ENEMY HORSE IS SEEN");
             return false;//in danger
         }
 
         //CHECK FOR BISHOPS
         if(BishopMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.BISHOP))
         {
-            System.out.println("An ENEMY BISHOP IS SEEN");
             return false;//in danger
         }
         //CHECK FOR QUEEN
         if(BishopMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.QUEEN))
         {
-            System.out.println("An ENEMY QUEEN IS SEEN");
             return false;//in danger
         }
 
         //CHECK FOR ROOKS
         if(RookMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.ROOK))
         {
-            System.out.println("An ENEMY ROOK IS SEEN");
             return false;//in danger
         }
         //CHECK FOR QUEEN
         if(RookMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.QUEEN))
         {
-            System.out.println("An ENEMY QUEEN IS SEEN");
             return false;//in danger
         }
 
@@ -105,10 +95,8 @@ public class MoveValidation
         //CHECK FOR KING
         if(KingMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.KING))
         {
-            System.out.println("An ENEMY KING IS SEEN");
             return false;//in danger
         }
-        System.out.println("move is safe");
         return true;//safe
     }
 

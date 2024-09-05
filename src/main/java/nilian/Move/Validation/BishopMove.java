@@ -11,7 +11,6 @@ public class BishopMove
 
     public static boolean isEnemyThere(Coordinate kingCoordinate, Color friendColor, Piece piece)
     {
-        System.out.println("BISHOP MOVE IS CALLED");
         int i = kingCoordinate.i;
         int j = kingCoordinate.j;
         Coordinate destination;
@@ -38,7 +37,6 @@ public class BishopMove
         for (int ei = 1; ei < 8; ei++) {
             if (i + ei < 8 && j + ei < 8)//validation
             {
-                System.out.println("ENTER THE BOARD");
                 destination = new Coordinate(i + ei, j + ei);
                 checkSquare = MoveValidation.getSquare(destination);
                 if (checkSquare.getPiece() != Piece.EMPTY)
@@ -57,7 +55,6 @@ public class BishopMove
         for (int ei = 1; ei < 8; ei++) {
             if (i - ei >= 0 && j - ei >= 0)//validation
             {
-                System.out.println("ENTER THE BOARD");
                 destination = new Coordinate(i - ei, j - ei);
                 checkSquare = MoveValidation.getSquare(destination);
                 if (checkSquare.getPiece() != Piece.EMPTY)
@@ -76,7 +73,6 @@ public class BishopMove
         for (int ei = 1; ei < 8; ei++) {
             if (i + ei < 8 && j - ei >= 0)//validation
             {
-                System.out.println("ENTER THE BOARD");
                 destination = new Coordinate(i + ei, j - ei);
                 checkSquare = MoveValidation.getSquare(destination);
                 if (checkSquare.getPiece() != Piece.EMPTY)
