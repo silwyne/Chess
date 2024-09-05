@@ -16,7 +16,6 @@ public class MoveValidation
 
     private static Coordinate source;
     private static Coordinate dst;
-    private static Color friendColor;
     /**
      * Checks if the Piece moves to the destination the king gets in danger or not
      *
@@ -29,7 +28,6 @@ public class MoveValidation
         board = boardToAnalyse;
         source = src_cord;
         dst = dst_cord;
-        friendColor = board.whoTurnIsIt();
         /*
         1. who's turn is it? find his king ...
         2. check if the king by the move is safe
@@ -50,114 +48,62 @@ public class MoveValidation
         NOTE : if the source cord is equal to king cord :
         So the dst Cord is actually the king cord !
          */
-        if(source == kingCoordinate)
+        if(source.equalsCoordinate(kingCoordinate))
         {
             kingCoordinate = dst_cord;
+            System.out.println("KING COORDINATE IS DESTINATION CORD");
+        } else {
+            System.out.println("MOVER IS NOT KING!");
         }
-        //king coordinate
-        int ki = kingCoordinate.i;
-        int kj = kingCoordinate.j;
+        System.out.println("CHECK KING IN DANGER FOR CORD: "+ kingCoordinate.toString());
         //finally in both situations the source is considered empty
         //and the dst is considered the mover or the friend
         //that is why we take squares from our own function which filters the result
         //to the reality we seek not the present board
 
-        Coordinate destination ;
-        ChessSquare checkSquare;
-        //CHECK FOR BLACK PAWN
-        if(friendColor == Color.BLACK)
+        //CHECK FOR ENEMY PAWN
+        if(PawnMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.PAWN))
         {
-            //RIGHT DOWN WHITE PAWN?
-            if(ki + 1 <8 && kj + 1 < 8)
-            {
-                destination = new Coordinate(ki + 1, kj + 1);
-                checkSquare = getSquare(destination);
-                if(checkSquare.getPiece() == Piece.PAWN
-                && checkSquare.getPieceColor() != friendColor)
-                {
-                    return false;
-                }
-            }
-            //LEFT DOWN WHITE PAWN?
-            if(ki + 1 <8 && kj - 1 >= 0)
-            {
-                destination = new Coordinate(ki + 1, kj - 1);
-                checkSquare = getSquare(destination);
-                if(checkSquare.getPiece() == Piece.PAWN
-                        && checkSquare.getPieceColor() != friendColor)
-                {
-                    return false;
-                }
-            }
-        //CHECK FOR WHITE PAWN
-        } else {
-            //RIGHT UP BLACK PAWN?
-            if(ki - 1 >= 0 && kj + 1 < 8)
-            {
-                destination = new Coordinate(ki - 1, kj + 1);
-                checkSquare = getSquare(destination);
-                if(checkSquare.getPiece() == Piece.PAWN
-                        && checkSquare.getPieceColor() != friendColor)
-                {
-                    return false;
-                }
-            }
-            //LEFT UP BLACK PAWN?
-            if(ki - 1 >= 0 && kj - 1 >= 0)
-            {
-                destination = new Coordinate(ki - 1, kj - 1);
-                checkSquare = getSquare(destination);
-                if(checkSquare.getPiece() == Piece.PAWN
-                        && checkSquare.getPieceColor() != friendColor)
-                {
-                    return false;
-                }
-            }
+            System.out.println("An ENEMY PAWN IS SEEN");
+            return false;//in danger
         }
 
-        //GET HORSE LOCATIONS
-        List<Coordinate> horseLocation = HorseMove.calculateOnBoardMoves(kingCoordinate);
         //CHECK FOR HORSES
-        if(isEnemyThere(horseLocation, Piece.HORSE))
+        if(HorseMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.HORSE))
         {
             System.out.println("An ENEMY HORSE IS SEEN");
             return false;//in danger
         }
 
-        //GET BISHOP LOCATIONS
-        List<Coordinate> bishopLocation = BishopMove.calculateOnBoardMoves(kingCoordinate);
         //CHECK FOR BISHOPS
-        if(isEnemyThere(bishopLocation, Piece.BISHOP))
+        if(BishopMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.BISHOP))
         {
             System.out.println("An ENEMY BISHOP IS SEEN");
             return false;//in danger
         }
         //CHECK FOR QUEEN
-        if(isEnemyThere(bishopLocation, Piece.QUEEN))
+        if(BishopMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.QUEEN))
         {
             System.out.println("An ENEMY QUEEN IS SEEN");
             return false;//in danger
         }
 
-        //GET ROOK LOCATIONS
-        List<Coordinate> rookLocation = RookMove.calculateOnBoardMoves(kingCoordinate);
-        //CHECK FOR BISHOPS
-        if(isEnemyThere(rookLocation, Piece.ROOK))
+        //CHECK FOR ROOKS
+        if(RookMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.ROOK))
         {
             System.out.println("An ENEMY ROOK IS SEEN");
             return false;//in danger
         }
         //CHECK FOR QUEEN
-        if(isEnemyThere(rookLocation, Piece.QUEEN))
+        if(RookMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.QUEEN))
         {
             System.out.println("An ENEMY QUEEN IS SEEN");
             return false;//in danger
         }
 
         //GET KING LOCATIONS
-        List<Coordinate> kingLocation = KingMove.calculateOnBoardMoves(kingCoordinate);
         //CHECK FOR KING
-        if(isEnemyThere(kingLocation, Piece.KING))
+        if(KingMove.isEnemyThere(kingCoordinate, board.whoTurnIsIt(), Piece.KING))
         {
             System.out.println("An ENEMY KING IS SEEN");
             return false;//in danger
@@ -166,41 +112,22 @@ public class MoveValidation
         return true;//safe
     }
 
-    private static ChessSquare getSquare(Coordinate cord)
+    public static ChessSquare getSquare(Coordinate cord)
     {
-        if(cord == source)
+        if(cord.equalsCoordinate(source))
         {
             ChessSquare result = new ChessSquare(cord.i, cord.j, board);
             result.setPiece(Piece.EMPTY);
             return result;
 
-        } else if (cord == dst)
+        } else if (cord.equalsCoordinate(dst))
         {
             ChessSquare result = new ChessSquare(cord.i, cord.j, board);
             result.setPieceColor(board.whoTurnIsIt());
+            result.setPiece(board.getSquare(source).getPiece());
             return result;
         }
         return board.getSquare(cord);
     }
 
-    /**
-     * Returns true if there is the enemy
-     * @param cors the list of expected location for the enemy
-     * @param piece the enemy kind we seek there
-     * @return true if there is the enemy
-     */
-    private static boolean isEnemyThere(List<Coordinate> cors, Piece piece)
-    {
-        ChessSquare checkSquare;
-        for(Coordinate cord : cors)
-        {
-            checkSquare = getSquare(cord);
-            if(checkSquare.getPieceColor() != friendColor
-            && checkSquare.getPiece() == piece)
-            {
-                return true ;//enemy is seen
-            }
-        }
-        return false;//no enemy is seen
-    }
 }

@@ -1,6 +1,12 @@
 package nilian.Move.Validation;
 
 import nilian.Move.Coordinate;
+import nilian.Move.Move;
+import nilian.Move.MoveName;
+import nilian.board.BoardMaker;
+import nilian.board.ChessSquare;
+import nilian.board.Color;
+import nilian.board.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,23 +14,23 @@ import java.util.List;
 public class RookMove
 {
 
-    /**
-     *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.
-     * @return a list of possible coordinates
-     */
-    public static List<Coordinate> calculateOnBoardMoves(Coordinate source)
-    {
-        List<Coordinate> result = new ArrayList<>();
-        int i = source.i;
-        int j = source.j;
+    public static boolean isEnemyThere(Coordinate kingCoordinate, Color friendColor, Piece piece) {
+        int i = kingCoordinate.i;
+        int j = kingCoordinate.j;
         Coordinate destination;
-
+        ChessSquare checkSquare;
         //right moves
         for (int ei = 1; ei < 8; ei++) {
-            if (j + ei < 8)
-            {
+            if (j + ei < 8) {
                 destination = new Coordinate(i, j + ei);
-                result.add(destination);
+                checkSquare = MoveValidation.getSquare(destination);
+                if (checkSquare.getPiece() != Piece.EMPTY) {
+                    if (checkSquare.getPieceColor() != friendColor
+                            && checkSquare.getPiece() == piece) {
+                        return true;
+                    }
+                    break;
+                }
             } else {
                 break;
             }
@@ -34,7 +40,14 @@ public class RookMove
             if (j - ei >= 0)//validation
             {
                 destination = new Coordinate(i, j - ei);
-                result.add(destination);
+                checkSquare = MoveValidation.getSquare(destination);
+                if (checkSquare.getPiece() != Piece.EMPTY) {
+                    if (checkSquare.getPieceColor() != friendColor
+                            && checkSquare.getPiece() == piece) {
+                        return true;
+                    }
+                    break;
+                }
             } else {
                 break;
             }
@@ -44,22 +57,35 @@ public class RookMove
             if (i - ei >= 0)//validation
             {
                 destination = new Coordinate(i - ei, j);
-                result.add(destination);
+                checkSquare = MoveValidation.getSquare(destination);
+                if (checkSquare.getPiece() != Piece.EMPTY) {
+                    if (checkSquare.getPieceColor() != friendColor
+                            && checkSquare.getPiece() == piece) {
+                        return true;
+                    }
+                    break;
+                }
             } else {
                 break;
             }
-        }
-        //down moves
+        }   //down moves
         for (int ei = 1; ei < 8; ei++) {
             if (i + ei < 8)//validation
             {
                 destination = new Coordinate(i + ei, j);
-                result.add(destination);
+                checkSquare = MoveValidation.getSquare(destination);
+                if (checkSquare.getPiece() != Piece.EMPTY) {
+                    if (checkSquare.getPieceColor() != friendColor
+                            && checkSquare.getPiece() == piece) {
+                        return true;
+                    }
+                    break;
+                }
             } else {
                 break;
             }
         }
-        return result;
+        //Finally safe
+        return false;
     }
-
 }

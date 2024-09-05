@@ -1,9 +1,9 @@
 package nilian.Move.Validation;
 
 import nilian.Move.Coordinate;
-
-import java.util.ArrayList;
-import java.util.List;
+import nilian.board.ChessSquare;
+import nilian.board.Color;
+import nilian.board.Piece;
 
 public class KingMove
 {
@@ -12,62 +12,102 @@ public class KingMove
      *  calculates all the possible coordinates as destination the bishop can go without getting the king killed.
      * @return a list of possible coordinates
      */
-    public static List<Coordinate> calculateOnBoardMoves(Coordinate source)
+    public static boolean isEnemyThere(Coordinate kingCoordinate, Color friendColor, Piece piece)
     {
-        List<Coordinate> result = new ArrayList<>();
-        int i = source.i;
-        int j = source.j;
-        Coordinate destination ;
+        int ki = kingCoordinate.i;
+        int kj = kingCoordinate.j;
+        Coordinate destination;
+        ChessSquare checkSquare;
         //right, left, up, down , ru, lu, rd, ld
         //right
-        if(j + 1 < 8)//move is in board
+        if(kj + 1 < 8)//move is in board
         {
-            destination = new Coordinate(i, j + 1);
-            result.add(destination);
+            destination = new Coordinate(ki, kj + 1);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //left
-        if(j - 1 >= 0)//move is in board
+        if(kj - 1 >= 0)//move is in board
         {
-            destination = new Coordinate(i, j - 1);
-            result.add(destination);
+            destination = new Coordinate(ki, kj - 1);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //up
-        if(i - 1 >= 0)//move is in board
+        if(ki - 1 >= 0)//move is in board
         {
-            destination = new Coordinate(i - 1, j);
-            result.add(destination);
+            destination = new Coordinate(ki - 1, kj);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //down
-        if(i + 1 < 8)//move is in board
+        if(ki + 1 < 8)//move is in board
         {
-            destination = new Coordinate(i + 1, j);
-            result.add(destination);
+            destination = new Coordinate(ki + 1, kj);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //right up
-        if(i - 1 >= 0 && j + 1 < 8)//move is in board
+        if(ki - 1 >= 0 && kj + 1 < 8)//move is in board
         {
-            destination = new Coordinate(i - 1, j + 1);
-            result.add(destination);
+            destination = new Coordinate(ki - 1, kj + 1);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //right down
-        if(i + 1 < 8 && j + 1 < 8)//move is in board
+        if(ki + 1 < 8 && kj + 1 < 8)//move is in board
         {
-            destination = new Coordinate(i + 1, j + 1);
-            result.add(destination);
+            destination = new Coordinate(ki + 1, kj + 1);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //left up
-        if(i - 1 >= 0 && j - 1 >= 0)//move is in board
+        if(ki - 1 >= 0 && kj - 1 >= 0)//move is in board
         {
-            destination = new Coordinate(i - 1, j - 1);
-            result.add(destination);
+            destination = new Coordinate(ki - 1, kj - 1);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
         //left down
-        if(i + 1 < 8 && j - 1 >= 0)//move is in board
+        if(ki + 1 < 8 && kj - 1 >= 0)//move is in board
         {
-            destination = new Coordinate(i + 1, j - 1);
-            result.add(destination);
+            destination = new Coordinate(ki + 1, kj - 1);
+            checkSquare = MoveValidation.getSquare(destination);
+            if(checkSquare.getPiece() == piece
+            && checkSquare.getPieceColor() != friendColor)
+            {
+                return true;
+            }
         }
-        return result;
+        return false;
     }
 
 }
