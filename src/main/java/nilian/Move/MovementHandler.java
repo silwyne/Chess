@@ -126,7 +126,7 @@ public class MovementHandler
         // Highlight the new empty square
         emptyLight = cor;
         ChessSquare currentSquare = BoardMaker.theBoard.getSquare(cor);
-        updateSquareStyle(currentSquare, BoardStyles.getPossibleStyle());
+        updateSquareStyle(currentSquare, BoardStyles.getPossibleStyle(currentSquare.getSquareColor()));
     }
 
     private static void turnLights(Set<Move> newPossibleMoves) {
@@ -152,13 +152,21 @@ public class MovementHandler
         }
 
         // Turn on lights
+        String onStyle ;
         for (Move move : squaresToTurnOn) {
             ChessSquare square = BoardMaker.theBoard.getSquare(move.dstCord);
+            // If the sum of row and column is even, it's a white square, otherwise it's black
             if(move.moveName== MoveName.MOVE)
             {
-                updateSquareStyle(square, BoardStyles.getPossibleStyle());
+                if ((move.dstCord.i + move.dstCord.j) % 2 == 0)
+                { onStyle = BoardStyles.getPossibleStyle(Color.WHITE);
+                } else {onStyle = BoardStyles.getPossibleStyle(Color.BLACK);}
+                updateSquareStyle(square, onStyle);
             } else {
-                updateSquareStyle(square, BoardStyles.getKillStyle());
+                if ((move.dstCord.i + move.dstCord.j) % 2 == 0)
+                { onStyle = BoardStyles.getKillStyle(Color.WHITE);
+                } else {onStyle = BoardStyles.getKillStyle(Color.BLACK);}
+                updateSquareStyle(square, onStyle);
             }
         }
 

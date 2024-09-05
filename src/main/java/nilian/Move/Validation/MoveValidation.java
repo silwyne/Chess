@@ -1,14 +1,11 @@
 package nilian.Move.Validation;
 
 import nilian.Move.Coordinate;
-import nilian.Move.Move;
-import nilian.Move.PieceMoves.Horse;
 import nilian.board.ChessBoard;
 import nilian.board.ChessSquare;
 import nilian.board.Color;
 import nilian.board.Piece;
 
-import java.util.List;
 
 public class MoveValidation
 {
