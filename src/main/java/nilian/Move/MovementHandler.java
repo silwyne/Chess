@@ -1,6 +1,7 @@
 package nilian.Move;
 
 import javafx.scene.Node;
+import nilian.Move.Validation.MoveValidation;
 import nilian.Style.BoardStyles;
 import nilian.board.*;
 
@@ -101,6 +102,17 @@ public class MovementHandler
         if(destSquare.getPiece() == Piece.KING)
         {
             board.updateBoardKingCoordinates(destSquare.getPieceColor(), dstCord);
+        }
+
+        //is my king check ?
+        //getting king coordinate
+        Coordinate kingCoordinate = board.getKingCoordinate(board.whoTurnIsIt());
+        if(!MoveValidation.isThisMoveValid(kingCoordinate, kingCoordinate, board))
+        {
+            System.out.println("KING IS NOT SAFE");
+            String checkStyle = BoardStyles.getCheckStyle();
+            //update style to check
+            updateSquareStyle(board.getSquare(kingCoordinate), checkStyle);
         }
     }
 

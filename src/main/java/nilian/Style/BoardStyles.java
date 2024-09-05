@@ -47,6 +47,15 @@ public class BoardStyles
             "-fx-effect: dropshadow(three-pass-box, rgba(255, 0, 0, 0.8), 10, 0.7, 0, 0);" +
             "-fx-background-insets: 1;";
 
+    private static final String checkStyle =
+            "-fx-background-color: rgba(252, 250, 42, 0.6);" +
+            "-fx-background-radius: 5;" +
+            "-fx-border-radius: 5;" +
+            "-fx-border-color: rgba(255, 255, 255, 0.5);" +
+            "-fx-border-width: 1;" +
+            "-fx-effect: dropshadow(three-pass-box, rgba(252, 250, 42, 0.8), 10, 0.7, 0, 0);" +
+            "-fx-background-insets: 1;";
+
 
     public static void setStyles(String style, ThemeSelector theme)
     {
@@ -83,5 +92,11 @@ public class BoardStyles
             return darkKillStyle;
         }
         return lightKillStyle;
+    }
+
+    public static String getCheckStyle()
+    {
+        System.out.println("GETTING CHECK STYLE");
+        return checkStyle;
     }
 }
