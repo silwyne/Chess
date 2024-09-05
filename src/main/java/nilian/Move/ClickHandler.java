@@ -1,7 +1,5 @@
 package nilian.Move;
 
-import javafx.scene.Node;
-import nilian.Move.Validation.MoveValidation;
 import nilian.Style.BoardStyles;
 import nilian.board.*;
 
@@ -14,8 +12,9 @@ public class MovementHandler
 {
     private static List<Move> possibleMoves = new ArrayList<>();
     private static Set<Move> highlightedSquares = new HashSet<>();
-    private static Coordinate checkLight ;
     private static Coordinate emptyLight ;
+    private static Coordinate movedToCoordinateLight;
+    private static Coordinate movedFromCoordinateLight;
     private static ChessSquare lastSquareClicked;
 
     public static void handleClick(ChessSquare square, ChessBoard board)
@@ -26,7 +25,7 @@ public class MovementHandler
             if(checkForMovement(square))
             {
                 //moving the square
-                moveTheLastSquareToDestination(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
+                PieceMover.move(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
                 clearPossibleMoves();
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = null ;
@@ -85,67 +84,6 @@ public class MovementHandler
     }
 
 
-    private static void moveTheLastSquareToDestination(ChessSquare sourceSquare, Coordinate dstCord) {
-        //if check light is on so we put it off
-        if(checkLight != null)
-        {
-            System.out.println("Turn Off Check Light");
-            //Turn off check light
-            String style;
-            // If the sum of row and column is even, it's a white square, otherwise it's black
-            if ((checkLight.i + checkLight.j) % 2 == 0)
-            { style = BoardStyles.getWhiteColor();
-            } else {style = BoardStyles.getBlackColor();}
-            updateSquareStyle( BoardMaker.theBoard.getSquare(checkLight), style);
-            checkLight = null;
-        }
-        ChessBoard board = sourceSquare.getBoard();
-        // Get the destination square
-        ChessSquare destSquare = board.getSquare(dstCord);
-
-        // Move the piece to the destination square
-        Node piecePicture = sourceSquare.getChildren().get(0);
-        destSquare.getChildren().clear();
-        destSquare.getChildren().add(piecePicture);
-        destSquare.setPiece(sourceSquare.getPiece());
-        // Clear the source square
-        sourceSquare.setPiece(Piece.EMPTY);
-        destSquare.setPieceColor(sourceSquare.getPieceColor());
-        updateSquareStyle(sourceSquare, getSquareStyle(sourceSquare.getI(), sourceSquare.getJ()));
-        updateSquareStyle(destSquare, getSquareStyle(dstCord.i, dstCord.j));
-
-        // Update the board model
-        board.setSquare(new Coordinate(sourceSquare.getI(), sourceSquare.getJ()), sourceSquare);
-        board.setSquare(dstCord, destSquare);
-
-        //UPDATE the turn
-        board.nextTurn();
-
-        //if the piece is king update the king coordinate
-        if(destSquare.getPiece() == Piece.KING)
-        {
-            board.updateBoardKingCoordinates(destSquare.getPieceColor(), dstCord);
-        }
-
-        //is my king check ?
-        //getting king coordinate
-        Coordinate kingCoordinate = board.getKingCoordinate(board.whoTurnIsIt());
-        if(!MoveValidation.isThisMoveValid(kingCoordinate, kingCoordinate, board))
-        {
-            //SO KING IS NOT SAFE NOW
-            String checkStyle = BoardStyles.getCheckStyle();
-            //update style to check
-            updateSquareStyle(board.getSquare(kingCoordinate), checkStyle);
-            checkLight = kingCoordinate;
-        }
-    }
-
-
-    private static String getSquareStyle(int i, int j) {
-        return (i + j) % 2 == 0 ? BoardStyles.getWhiteColor() : BoardStyles.getBlackColor();
-    }
-
-
     private static void turnEmpty(Coordinate cor) {
         // Remove the highlighting from the previous empty square
         if (emptyLight != null) {
@@ -157,13 +95,13 @@ public class MovementHandler
             } else {
                 style = BoardStyles.getBlackColor();
             }
-            updateSquareStyle(previousSquare, style);
+            previousSquare.updateSquareStyle(style);
         }
 
         // Highlight the new empty square
         emptyLight = cor;
         ChessSquare currentSquare = BoardMaker.theBoard.getSquare(cor);
-        updateSquareStyle(currentSquare, BoardStyles.getEmptyStyle());
+        currentSquare.updateSquareStyle(BoardStyles.getEmptyStyle());
     }
 
     private static void turnLights(Set<Move> newPossibleMoves)
@@ -186,7 +124,7 @@ public class MovementHandler
             if ((move.dstCord.i + move.dstCord.j) % 2 == 0)
             { style = BoardStyles.getWhiteColor();
             } else {style = BoardStyles.getBlackColor();}
-            updateSquareStyle(square, style);
+            square.updateSquareStyle(style);
         }
 
         // Turn on lights
@@ -199,27 +137,16 @@ public class MovementHandler
                 if ((move.dstCord.i + move.dstCord.j) % 2 == 0)
                 { onStyle = BoardStyles.getPossibleStyle(Color.WHITE);
                 } else {onStyle = BoardStyles.getPossibleStyle(Color.BLACK);}
-                updateSquareStyle(square, onStyle);
+                square.updateSquareStyle(onStyle);
             } else {
                 if ((move.dstCord.i + move.dstCord.j) % 2 == 0)
                 { onStyle = BoardStyles.getKillStyle(Color.WHITE);
                 } else {onStyle = BoardStyles.getKillStyle(Color.BLACK);}
-                updateSquareStyle(square, onStyle);
+                square.updateSquareStyle(onStyle);
             }
         }
 
         // Update the set of highlighted squares
         highlightedSquares = new HashSet<>(newPossibleMoves);
-    }
-
-    private static void updateSquareStyle(ChessSquare square, String style) {
-        square.setStyle(style);
-        square.applyCss();
-        square.requestLayout();
-        // If needed, uncomment these lines:
-        // BoardMaker.chessboard.getChildren().remove(square);
-        // BoardMaker.chessboard.add(square, square.getI(), square.getJ());
-        // Update the model if necessary
-        BoardMaker.theBoard.setSquare(new Coordinate(square.getI(), square.getJ()), square);
     }
 }

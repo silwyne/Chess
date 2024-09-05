@@ -3,7 +3,7 @@ package nilian.board;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import nilian.Move.Coordinate;
-import nilian.Move.MovementHandler;
+import nilian.Move.ClickHandler;
 
 public class ChessSquare extends Pane
 {
@@ -13,7 +13,7 @@ public class ChessSquare extends Pane
     private Color pieceColor;
     private Color squareColor;
     private boolean isClicked;
-    private ChessBoard board;
+    private final ChessBoard board;
 
     public ChessSquare(int i, int j, ChessBoard board)
     {
@@ -26,7 +26,7 @@ public class ChessSquare extends Pane
         this.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
-                MovementHandler.handleClick(ChessSquare.this, board);
+                ClickHandler.handleClick(ChessSquare.this, board);
             }
 
         });
@@ -86,4 +86,15 @@ public class ChessSquare extends Pane
     }
 
     public ChessBoard getBoard() {return this.board;}
+
+    public void updateSquareStyle(String style) {
+        this.setStyle(style);
+        this.applyCss();
+        this.requestLayout();
+        // If needed, uncomment these lines:
+        // BoardMaker.chessboard.getChildren().remove(square);
+        // BoardMaker.chessboard.add(square, square.getI(), square.getJ());
+        // Update the model if necessary
+        board.setSquare(getCoordinate(), this);
+    }
 }
