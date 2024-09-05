@@ -37,6 +37,15 @@ public class MovementHandler
                 turnLights(new HashSet<>(possibleMoves));
                 lastSquareClicked = square ;
             }
+            //EMPTY CLICKED
+            else if(square.getPiece() == Piece.EMPTY)
+            {
+                clearPossibleMoves();
+                turnLights(new HashSet<>(possibleMoves));
+                turnEmpty(square.getCoordinate());
+                clearPossibleMoves();
+                lastSquareClicked = null;
+            }
         } else {
             //check for show possible moves
             if(square.getPiece() != Piece.EMPTY && board.whoTurnIsIt() == square.getPieceColor())
@@ -109,12 +118,13 @@ public class MovementHandler
         Coordinate kingCoordinate = board.getKingCoordinate(board.whoTurnIsIt());
         if(!MoveValidation.isThisMoveValid(kingCoordinate, kingCoordinate, board))
         {
-            System.out.println("KING IS NOT SAFE");
+            //SO KING IS NOT SAFE NOW
             String checkStyle = BoardStyles.getCheckStyle();
             //update style to check
             updateSquareStyle(board.getSquare(kingCoordinate), checkStyle);
         }
     }
+
 
     private static String getSquareStyle(int i, int j) {
         return (i + j) % 2 == 0 ? BoardStyles.getWhiteColor() : BoardStyles.getBlackColor();
@@ -138,7 +148,7 @@ public class MovementHandler
         // Highlight the new empty square
         emptyLight = cor;
         ChessSquare currentSquare = BoardMaker.theBoard.getSquare(cor);
-        updateSquareStyle(currentSquare, BoardStyles.getPossibleStyle(currentSquare.getSquareColor()));
+        updateSquareStyle(currentSquare, BoardStyles.getEmptyStyle());
     }
 
     private static void turnLights(Set<Move> newPossibleMoves) {
