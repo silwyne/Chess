@@ -17,7 +17,6 @@ public class PieceMover
         //if check light is on so we put it off
         if(checkLight != null)
         {
-            System.out.println("Turn Off Check Light");
             //Turn off check light
             String style;
             // If the sum of row and column is even, it's a white square, otherwise it's black
@@ -72,4 +71,13 @@ public class PieceMover
         return (i + j) % 2 == 0 ? BoardStyles.getWhiteColor() : BoardStyles.getBlackColor();
     }
 
+    public static boolean checkForMovement(ChessSquare destinationSquare)
+    {
+        for (Move possibleMove : ClickHandler.getPossibleMoves()) {
+            if (possibleMove.dstCord.equalsCoordinate(destinationSquare.getI(), destinationSquare.getJ())) {
+                return true;
+            }
+        }
+        return false ;
+    }
 }

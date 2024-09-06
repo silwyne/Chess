@@ -13,8 +13,6 @@ public class ClickHandler
     private static List<Move> possibleMoves = new ArrayList<>();
     private static Set<Move> highlightedSquares = new HashSet<>();
     private static Coordinate emptyLight ;
-    private static Coordinate movedToCoordinateLight;
-    private static Coordinate movedFromCoordinateLight;
     private static ChessSquare lastSquareClicked;
 
     public static void handleClick(ChessSquare square, ChessBoard board)
@@ -22,7 +20,7 @@ public class ClickHandler
         if(!possibleMoves.isEmpty())
         {
             //Check for movement
-            if(checkForMovement(square))
+            if(PieceMover.checkForMovement(square))
             {
                 //moving the square
                 PieceMover.move(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
@@ -70,17 +68,6 @@ public class ClickHandler
         {
             possibleMoves.clear();
         }
-    }
-
-
-    private static boolean checkForMovement(ChessSquare destinationSquare)
-    {
-        for (Move possibleMove : possibleMoves) {
-            if (possibleMove.dstCord.equalsCoordinate(destinationSquare.getI(), destinationSquare.getJ())) {
-                return true;
-            }
-        }
-        return false ;
     }
 
 
@@ -148,5 +135,9 @@ public class ClickHandler
 
         // Update the set of highlighted squares
         highlightedSquares = new HashSet<>(newPossibleMoves);
+    }
+
+    public static List<Move> getPossibleMoves() {
+        return possibleMoves;
     }
 }
