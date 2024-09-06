@@ -11,6 +11,8 @@ import nilian.board.Piece;
 public class PieceMover
 {
     private static Coordinate checkLight ;
+    private static ChessSquare movedFromSquareLight ;
+    private static ChessSquare movedToSquareLight ;
 
     public static void move(ChessSquare sourceSquare, Coordinate dstCord)
     {
@@ -65,6 +67,15 @@ public class PieceMover
             board.getSquare(kingCoordinate).updateSquareStyle(checkStyle);
             checkLight = kingCoordinate;
         }
+
+        //HANDLING MOVING LIGHTS
+        //TURN IT ON
+        movedFromSquareLight = sourceSquare;
+        movedToSquareLight = board.getSquare(dstCord);
+        movedFromSquareLight.updateSquareStyle(BoardStyles.getMovedFromStyle());
+        movedToSquareLight.updateSquareStyle(BoardStyles.getMovedToStyle());
+        //TURN IT OFF FOR NEXT TIME
+        //adding it to highLightedLights
     }
 
     private static String getSquareStyle(int i, int j) {

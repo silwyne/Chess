@@ -112,4 +112,8 @@ public class BoardStyles
     {
         return emptyStyle;
     }
+
+    public static String getMovedFromStyle(){return emptyStyle;}
+
+    public static String getMovedToStyle(){return emptyStyle;}
 }
