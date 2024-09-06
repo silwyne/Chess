@@ -62,8 +62,9 @@ public class PieceMover
         if(!MoveValidation.isThisMoveValid(kingCoordinate, kingCoordinate, board))
         {
             //SO KING IS NOT SAFE NOW
+            System.out.println("KING IS CHECK");
             LightHandler.turnCheckLightOn(board, kingCoordinate);
-            if(EndGameChecker.isEndGame())
+            if(EndGameChecker.isEndGame(board))
             {
                 System.out.println("END GAME");
             }

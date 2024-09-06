@@ -43,7 +43,8 @@ public class BoardMaker
                 if(row < 2 || row > 5)
                 {
                     square = getSquareWithPiece(row, col);
-
+                    //ADDING PIECE TO PRESENT PIECES OF THE BOARD
+                    theBoard.addPresentPiece(square);
                 } else {
                     square = new ChessSquare(row, col, theBoard);
                     //putting it empty while is empty

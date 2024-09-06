@@ -1,18 +1,54 @@
 package nilian.Game;
 
+import nilian.Move.Move;
+import nilian.Move.MoveShower;
+import nilian.board.ChessBoard;
+import nilian.board.ChessSquare;
+import nilian.board.Color;
+import nilian.board.PieceSetIdentifier;
+
+import java.util.List;
+
 public class EndGameChecker
 {
 
-    public static boolean isEndGame()
+    public static boolean isEndGame(ChessBoard board)
     {
         /*
-        1.CHECK PAWN MOVES
-        2.CHECK HORSE MOVES
-        3.CHECK BISHOP MOVES
-        4.CHECK QUEEN MOVES
-        5.CHECK ROOK MOVES
-        6.CHECK KING MOVES
+        1. all present Pieces
+        2. get list of valid moves
+        3. if only 1 move there is break return true
          */
-        return false;
+        //GET LIST OF PRESENT PIECES
+        List<PieceSetIdentifier> presentPieces;
+        if(board.whoTurnIsIt() == Color.BLACK)
+        {
+            presentPieces = board.getBlackPieces();
+        } else {
+            presentPieces = board.getWhitePieces();;
+        }
+        //IF THERE IS ANY VALID MOVE BETWEEN THEM
+        List<Move> validMoves ;
+        ChessSquare tempSquare;
+        ChessSquare checkSquare;
+        for(PieceSetIdentifier psi: presentPieces)
+        {
+            checkSquare = board.getSquare(psi.getCord());
+            if(checkSquare.getPiece().equals(psi.getPiece())
+            && checkSquare.getPieceColor().equals(psi.getPieceColor()))
+            {
+                System.out.println("CHECKING "+psi);
+                tempSquare = new ChessSquare(psi.getCord().i, psi.getCord().j, board);
+                tempSquare.setPiece(psi.getPiece());
+                tempSquare.setPieceColor(psi.getPieceColor());
+                validMoves = MoveShower.showMoves(tempSquare);
+                if(!validMoves.isEmpty())//THERE IS STILL A POSSIBLE MOVE
+                {
+                    System.out.println(validMoves.get(0).dstCord);
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

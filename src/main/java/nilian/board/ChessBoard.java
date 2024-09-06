@@ -15,8 +15,8 @@ public class ChessBoard
     /*
     Holds all the living Pieces of black and white
      */
-    private List<PieceSetIdentifier> blackPieces = new ArrayList<>();
-    private List<PieceSetIdentifier> whitePieces = new ArrayList<>();
+    private final List<PieceSetIdentifier> blackPieces = new ArrayList<>();
+    private final List<PieceSetIdentifier> whitePieces = new ArrayList<>();
     /*
     Kings Coordinates
      */
@@ -127,19 +127,23 @@ public class ChessBoard
         //GETTING INDEX
         if(square.getPieceColor() == Color.BLACK)
         {
-            index = blackPieces.indexOf(psi);
+            index = getPieceListIndex(blackPieces, psi);
         } else {
-            index = whitePieces.indexOf(psi);
+            index = getPieceListIndex(whitePieces, psi);
         }
 
         //UPDATED SET IDENTIFIER
         PieceSetIdentifier updatedPsi = new PieceSetIdentifier(dstCord, square.getPieceColor(), square.getPiece());
         //updating
-        if(square.getPieceColor() == Color.BLACK)
+        System.out.println("INDEX OF PIECE IS: "+index);
+        if(index >= 0)
         {
-            blackPieces.set(index, updatedPsi);
-        } else {
-            whitePieces.set(index, updatedPsi);
+            if(square.getPieceColor() == Color.BLACK)
+            {
+                blackPieces.set(index, updatedPsi);
+            } else {
+                whitePieces.set(index, updatedPsi);
+            }
         }
     }
 
@@ -154,5 +158,38 @@ public class ChessBoard
         } else {
             whitePieces.remove(new PieceSetIdentifier(square.getCoordinate(), square.getPieceColor(), square.getPiece()));
         }
+    }
+
+    public List<PieceSetIdentifier> getBlackPieces() {
+        return blackPieces;
+    }
+
+    public List<PieceSetIdentifier> getWhitePieces() {
+        return whitePieces;
+    }
+
+    public void addPresentPiece(ChessSquare square)
+    {
+        PieceSetIdentifier psi = new PieceSetIdentifier(square.getCoordinate(), square.getPieceColor(), square.getPiece());
+        if(square.getPieceColor() == Color.BLACK)
+        {
+            blackPieces.add(psi);
+        } else {
+            whitePieces.add(psi);
+        }
+    }
+
+    private int getPieceListIndex(List<PieceSetIdentifier> list, PieceSetIdentifier psi)
+    {
+        for(PieceSetIdentifier tempPolo: list)
+        {
+            if(tempPolo.getCord().equalsCoordinate(psi.getCord())
+            && tempPolo.getPiece().equals(psi.getPiece())
+            && tempPolo.getPieceColor().equals(psi.getPieceColor()))
+            {
+                return list.indexOf(tempPolo);
+            }
+        }
+        return -1;
     }
 }

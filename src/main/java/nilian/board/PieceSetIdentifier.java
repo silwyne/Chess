@@ -4,9 +4,9 @@ import nilian.Move.Coordinate;
 
 public class PieceSetIdentifier
 {
-    private Coordinate cord;
-    private Color pieceColor;
-    private Piece piece;
+    private final Coordinate cord;
+    private final Color pieceColor;
+    private final Piece piece;
 
     public PieceSetIdentifier(Coordinate cord, Color pieceColor, Piece piece)
     {
@@ -25,5 +25,14 @@ public class PieceSetIdentifier
 
     public Piece getPiece() {
         return piece;
+    }
+
+    @Override
+    public String toString()
+    {
+        return
+                cord+","+
+                pieceColor+","+
+                piece;
     }
 }
