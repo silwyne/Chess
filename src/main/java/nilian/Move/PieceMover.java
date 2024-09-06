@@ -1,9 +1,9 @@
 package nilian.Move;
 
 import javafx.scene.Node;
+import nilian.Game.EndGameChecker;
 import nilian.Move.Validation.MoveValidation;
 import nilian.Style.BoardStyles;
-import nilian.board.BoardMaker;
 import nilian.board.ChessBoard;
 import nilian.board.ChessSquare;
 import nilian.board.Piece;
@@ -50,11 +50,12 @@ public class PieceMover
         {
             //SO KING IS NOT SAFE NOW
             LightHandler.turnCheckLightOn(board, kingCoordinate);
+            if(EndGameChecker.isEndGame())
+            {
+                System.out.println("END GAME");
+            }
         }
 
-//        //HANDLING MOVING LIGHTS
-//        //TURN IT ON
-//        LightHandler.turnMoveLightsOn(sourceSquare, dstCord);
     }
 
     private static String getSquareStyle(int i, int j) {

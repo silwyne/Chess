@@ -10,8 +10,13 @@ public class ChessBoard
     /*
     Holds all the squares of the board.
      */
-    private final List<List<ChessSquare>> allPieces = new ArrayList<>();
+    private final List<List<ChessSquare>> allSquares = new ArrayList<>();
 
+    /*
+    Holds all the living Pieces of black and white
+     */
+    private List<PieceSetIdentifier> blackPieces = new ArrayList<>();
+    private List<PieceSetIdentifier> whitePieces = new ArrayList<>();
     /*
     Kings Coordinates
      */
@@ -29,12 +34,12 @@ public class ChessBoard
      */
     public void addSquare(ChessSquare square)
     {
-        if(allPieces.size() <= square.getJ())
+        if(allSquares.size() <= square.getJ())
         {
             List<ChessSquare> temp = new ArrayList<>();
-            allPieces.add(temp);
+            allSquares.add(temp);
         }
-        allPieces.get(square.getI()).add(square.getJ(), square);
+        allSquares.get(square.getI()).add(square.getJ(), square);
     }
 
     /**
@@ -44,7 +49,7 @@ public class ChessBoard
      */
     public ChessSquare getSquare(Coordinate cord)
     {
-        return allPieces.get(cord.i).get(cord.j);
+        return allSquares.get(cord.i).get(cord.j);
     }
 
     /**
@@ -55,9 +60,9 @@ public class ChessBoard
     public void setSquare(Coordinate cord, ChessSquare square)
     {
         //making it empty first
-        allPieces.get(cord.i).set(cord.j, null);
+        allSquares.get(cord.i).set(cord.j, null);
         //putting new value
-        allPieces.get(cord.i).set(cord.j, square);
+        allSquares.get(cord.i).set(cord.j, square);
     }
 
     /**
@@ -108,5 +113,46 @@ public class ChessBoard
             return blackKingCoordinate;
         }
         return whiteKingCoordinate;
+    }
+
+    /**
+     * Updates Piece Place in board the way it is accessible faster
+     * @param square the Square Contains Piece before moving
+     * @param dstCord the destination of move the piece has
+     */
+    public void updatePiece(ChessSquare square, Coordinate dstCord)
+    {
+        int index ;
+        PieceSetIdentifier psi = new PieceSetIdentifier(square.getCoordinate(), square.getPieceColor(), square.getPiece());
+        //GETTING INDEX
+        if(square.getPieceColor() == Color.BLACK)
+        {
+            index = blackPieces.indexOf(psi);
+        } else {
+            index = whitePieces.indexOf(psi);
+        }
+
+        //UPDATED SET IDENTIFIER
+        PieceSetIdentifier updatedPsi = new PieceSetIdentifier(dstCord, square.getPieceColor(), square.getPiece());
+        //updating
+        if(square.getPieceColor() == Color.BLACK)
+        {
+            blackPieces.set(index, updatedPsi);
+        } else {
+            whitePieces.set(index, updatedPsi);
+        }
+    }
+
+    /**
+     * When a Piece gets killed, we have to delete it from present pieces
+     * @param square the square contains the killed piece
+     */
+    private void deletePiece(ChessSquare square) {
+        if(square.getPieceColor() == Color.BLACK)
+        {
+            blackPieces.remove(new PieceSetIdentifier(square.getCoordinate(), square.getPieceColor(), square.getPiece()));
+        } else {
+            whitePieces.remove(new PieceSetIdentifier(square.getCoordinate(), square.getPieceColor(), square.getPiece()));
+        }
     }
 }

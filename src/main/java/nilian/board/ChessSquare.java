@@ -12,7 +12,6 @@ public class ChessSquare extends Pane
     private Piece piece;
     private Color pieceColor;
     private Color squareColor;
-    private boolean isClicked;
     private final ChessBoard board;
 
     public ChessSquare(int i, int j, ChessBoard board)
@@ -72,14 +71,6 @@ public class ChessSquare extends Pane
         this.pieceColor = pieceColor;
     }
 
-    public boolean isClicked() {
-        return isClicked;
-    }
-
-    public void setClicked(boolean clicked) {
-        isClicked = clicked;
-    }
-
     public Coordinate getCoordinate()
     {
         return new Coordinate(i, j);
@@ -88,14 +79,9 @@ public class ChessSquare extends Pane
     public ChessBoard getBoard() {return this.board;}
 
     public void updateSquareStyle(String style) {
-        System.out.println("UPDATE STYLE: "+getCoordinate());
         this.setStyle(style);
         this.applyCss();
         this.requestLayout();
-        // If needed, uncomment these lines:
-        // BoardMaker.chessboard.getChildren().remove(square);
-        // BoardMaker.chessboard.add(square, square.getI(), square.getJ());
-        // Update the model if necessary
         board.setSquare(getCoordinate(), this);
     }
 }
