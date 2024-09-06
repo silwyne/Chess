@@ -19,9 +19,11 @@ public class ClickHandler
             if(PieceMover.checkForMovement(square))
             {
                 //moving the square
+                LightHandler.turnMoveLightsOff();
                 PieceMover.move(lastSquareClicked, new Coordinate(square.getI(), square.getJ()));
                 clearPossibleMoves();
                 LightHandler.turnLights(new HashSet<>(possibleMoves));
+                LightHandler.turnMoveLightsOn(lastSquareClicked, square.getCoordinate());
                 lastSquareClicked = null ;
             }
             //check for showing possible moves

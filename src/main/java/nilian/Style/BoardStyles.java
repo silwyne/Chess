@@ -65,6 +65,24 @@ public class BoardStyles
             "-fx-effect: dropshadow(three-pass-box, rgba(51, 253, 189, 0.8), 10, 0.7, 0, 0);" +
             "-fx-background-insets: 1;";
 
+    private static final String movedToStyle =
+            "-fx-background-color: rgba(0, 77, 152, 0.6);" +
+            "-fx-background-radius: 5;" +
+            "-fx-border-radius: 5;" +
+            "-fx-border-color: rgba(255, 255, 255, 0.5);" +
+            "-fx-border-width: 1;" +
+            "-fx-effect: dropshadow(three-pass-box, rgba(0, 77, 152, 0.8), 10, 0.7, 0, 0);" +
+            "-fx-background-insets: 1;";
+
+    private static final String movedFromStyle =
+            "-fx-background-color: rgba(0, 190, 35, 0.6);" +
+                    "-fx-background-radius: 5;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-border-color: rgba(255, 255, 255, 0.5);" +
+                    "-fx-border-width: 1;" +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0, 190, 35, 0.8), 10, 0.7, 0, 0);" +
+                    "-fx-background-insets: 1;";
+
 
     public static void setStyles(String style, ThemeSelector theme)
     {
@@ -113,7 +131,7 @@ public class BoardStyles
         return emptyStyle;
     }
 
-    public static String getMovedFromStyle(){return emptyStyle;}
+    public static String getMovedFromStyle(){return movedFromStyle;}
 
-    public static String getMovedToStyle(){return emptyStyle;}
+    public static String getMovedToStyle(){return movedToStyle;}
 }

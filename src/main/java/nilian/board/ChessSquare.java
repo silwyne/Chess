@@ -88,6 +88,7 @@ public class ChessSquare extends Pane
     public ChessBoard getBoard() {return this.board;}
 
     public void updateSquareStyle(String style) {
+        System.out.println("UPDATE STYLE: "+getCoordinate());
         this.setStyle(style);
         this.applyCss();
         this.requestLayout();

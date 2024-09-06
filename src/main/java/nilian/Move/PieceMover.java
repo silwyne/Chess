@@ -10,24 +10,11 @@ import nilian.board.Piece;
 
 public class PieceMover
 {
-    private static Coordinate checkLight ;
-    private static ChessSquare movedFromSquareLight ;
-    private static ChessSquare movedToSquareLight ;
 
     public static void move(ChessSquare sourceSquare, Coordinate dstCord)
     {
         //if check light is on so we put it off
-        if(checkLight != null)
-        {
-            //Turn off check light
-            String style;
-            // If the sum of row and column is even, it's a white square, otherwise it's black
-            if ((checkLight.i + checkLight.j) % 2 == 0)
-            { style = BoardStyles.getWhiteColor();
-            } else {style = BoardStyles.getBlackColor();}
-            BoardMaker.theBoard.getSquare(checkLight).updateSquareStyle(style);
-            checkLight = null;
-        }
+        LightHandler.turnCheckLightOff();
         ChessBoard board = sourceSquare.getBoard();
         // Get the destination square
         ChessSquare dstSquare = board.getSquare(dstCord);
@@ -62,20 +49,12 @@ public class PieceMover
         if(!MoveValidation.isThisMoveValid(kingCoordinate, kingCoordinate, board))
         {
             //SO KING IS NOT SAFE NOW
-            String checkStyle = BoardStyles.getCheckStyle();
-            //update style to check
-            board.getSquare(kingCoordinate).updateSquareStyle(checkStyle);
-            checkLight = kingCoordinate;
+            LightHandler.turnCheckLightOn(board, kingCoordinate);
         }
 
-        //HANDLING MOVING LIGHTS
-        //TURN IT ON
-        movedFromSquareLight = sourceSquare;
-        movedToSquareLight = board.getSquare(dstCord);
-        movedFromSquareLight.updateSquareStyle(BoardStyles.getMovedFromStyle());
-        movedToSquareLight.updateSquareStyle(BoardStyles.getMovedToStyle());
-        //TURN IT OFF FOR NEXT TIME
-        //adding it to highLightedLights
+//        //HANDLING MOVING LIGHTS
+//        //TURN IT ON
+//        LightHandler.turnMoveLightsOn(sourceSquare, dstCord);
     }
 
     private static String getSquareStyle(int i, int j) {
