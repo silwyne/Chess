@@ -147,7 +147,7 @@ public class ChessBoard
      * When a Piece gets killed, we have to delete it from present pieces
      * @param square the square contains the killed piece
      */
-    private void deletePiece(ChessSquare square) {
+    public void deletePiece(ChessSquare square) {
         if(square.getPieceColor() == Color.BLACK)
         {
             blackPieces.remove(new PieceSetIdentifier(square.getCoordinate(), square.getPieceColor(), square.getPiece()));

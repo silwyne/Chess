@@ -13,9 +13,22 @@ public class PieceMover
 
     public static void move(ChessSquare sourceSquare, Coordinate dstCord)
     {
+        //IF MOVE IS KILL
+        /*
+        So we delete the killed piece from present pieces in board
+         */
+        ChessBoard board = sourceSquare.getBoard();
+        if(board.getSquare(dstCord).getPieceColor() != sourceSquare.getPieceColor())
+        {
+            board.deletePiece(board.getSquare(dstCord));
+        }
+        /*
+        Update the piece place from the present pieces list in Board Object
+         */
+        board.updatePiece(sourceSquare, dstCord);
+
         //if check light is on so we put it off
         LightHandler.turnCheckLightOff();
-        ChessBoard board = sourceSquare.getBoard();
         // Get the destination square
         ChessSquare dstSquare = board.getSquare(dstCord);
 
