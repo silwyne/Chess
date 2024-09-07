@@ -135,7 +135,6 @@ public class ChessBoard
         //UPDATED SET IDENTIFIER
         PieceSetIdentifier updatedPsi = new PieceSetIdentifier(dstCord, square.getPieceColor(), square.getPiece());
         //updating
-        System.out.println("INDEX OF PIECE IS: "+index);
         if(index >= 0)
         {
             if(square.getPieceColor() == Color.BLACK)
@@ -143,6 +142,12 @@ public class ChessBoard
                 blackPieces.set(index, updatedPsi);
             } else {
                 whitePieces.set(index, updatedPsi);
+            }
+        } else {
+            try {
+                throw new Exception("What the fuck ? why i cant find your piece?");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }

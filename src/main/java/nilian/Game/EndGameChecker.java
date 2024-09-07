@@ -37,14 +37,12 @@ public class EndGameChecker
             if(checkSquare.getPiece().equals(psi.getPiece())
             && checkSquare.getPieceColor().equals(psi.getPieceColor()))
             {
-                System.out.println("CHECKING "+psi);
                 tempSquare = new ChessSquare(psi.getCord().i, psi.getCord().j, board);
                 tempSquare.setPiece(psi.getPiece());
                 tempSquare.setPieceColor(psi.getPieceColor());
                 validMoves = MoveShower.showMoves(tempSquare);
                 if(!validMoves.isEmpty())//THERE IS STILL A POSSIBLE MOVE
                 {
-                    System.out.println(validMoves.get(0).dstCord);
                     return false;
                 }
             }
