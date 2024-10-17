@@ -23,3 +23,18 @@ guide: I have something like this `javafx-sdk-17.0.11` on my Debian!
 `--module-path /path/to/javafx-sdk-17.0.11/lib --add-modules=javafx.controls`\
 That's why I said you have to install `Java fx` :)
 - There would be no problem for running this Application anymore!
+## Themes
+- ### Main Theme Picker
+![Alt text](images/main-theme-picker.png)
+- ### Styles
+![Alt text](images/style-chooser.png) 
+- ### Colors
+![Alt text](images/color-chooser.png)
+
+## Pictures
+- ### Pawn move
+![Alt text](images/pawn-move.png)
+- ### Moved square
+![Alt text](images/moved-square.png)
+- ### Kill Colors
+![Alt text](images/kill-colors.png)
