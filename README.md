@@ -15,6 +15,20 @@ That's why I am going to make my new game in `Java Swing`.
 
 I would keep this project in hand until I complete its AI part. :)
 
+## Options
+- king checker
+- valid move checker
+- last move shower
+- (en-passant not supported yet)
+
+## Moves
+- king moves
+- queen moves
+- rook moves
+- bishop moves
+- soldier moves
+- knight moves
+
 ## Running the Application
 - Make sure you have all the Dependencies in pom file. `mvn install`
 - Install `Java fx` on your System based on if it is Linux or Windows there are different versions.\
